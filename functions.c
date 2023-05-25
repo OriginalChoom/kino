@@ -1,24 +1,64 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "header.h"
 
-void pravljenjeListe(){
-
-
+void ispisFilmova(FILM filmovi[], int brojacFilmova){
+	if (brojacFilmova == 0)
+	{
+		printf("Nema filmova za pokazati.");
+	}
+	printf("\nLista filmova: \n\n");
+	for (int i = 0; i < brojacFilmova; i++)
+	{
+		printf("ID: %d.  %s (%d) \t\t\ Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+	}
 
 }
 
-int dodajFilm(){
+void dodajFilm(FILM filmovi[], int *brojacFilmova, int max){
+	if (*brojacFilmova == max)
+	{
+		printf("Max filmovi, ne mozemo dodavati vise filmova!\n");
+		return 1;
+	}
 
+	printf("Unesite parametre za film:\n");
+	FILM noviFilm;
 
-    return 0;
+	printf("Unesite ime novog filma: ");
+	scanf(" %[^\n]", noviFilm.ime);
+
+	printf("Unesite fodinu novog filma: ");
+	scanf("%d", &noviFilm.godina);
+
+	printf("Unesite zanr novog filma(1): ");
+	scanf(" %[^\n]", noviFilm.zanr);
+
+	filmovi[*brojacFilmova] = noviFilm;
+	(*brojacFilmova)++;
+
+	printf("Dodan film.\n");
 }
 
-int brisiFilm(){
+void brisiFilm(FILM filmovi[], int *brojacFilmova){
+	
 
+	printf("Unesite index filma kojeg zelite obrisati: \n");
+	int index;
+	
+	do
+	{
+		scanf("%d", &index);
 
+	} while(index >= 0 && index < *brojacFilmova);
 
-    return 0;
+	for (int i = index; i < *brojacFilmova - 1; i++) {
+		filmovi[i] = filmovi[i + 1];
+	}
+	(*brojacFilmova)--;
+	printf("Film obrisan!\n");
 } 
 
 void sortGodina(){

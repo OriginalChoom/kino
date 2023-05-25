@@ -1,80 +1,91 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include "header.h" 
+#include "header.h"
 
-void pravljenjeListe(); //pravljenje liste iz filmovi.txt - zove se odma
-int dodajFilm(); //dodavanje filma
-int brisiFilm(); //brisanje filma
+void ispisFilmova(FILM* filmovi, int); //ispis filmova
+void dodajFilm(FILM* filmovi, int); //dodavanje filma
+void brisiFilm(FILM filmovi[], int* brojacFilmova); //brisanje filma
 void sortGodina(); // sortiraj prema godinama
 void sortZanr(); //sortiranje po zanreu
 void close(); //zatvaranje programa
 
 int main(){
 
-    //inicializiranje filmovi.txt
+	//alokacija filmova
+	int maxFilms = 10;
+	FILM* filmovi = malloc(maxFilms * sizeof(FILM));
+	if (filmovi == NULL)
+	{
+		printf("Alokacija ne uspjela");
+		return 1;
+	}
+    int brojacFilmova = 0;
 
-    FILE *filmovi = fopen("filmovi.txt", "r");
-    if (filmovi != NULL)
+	//inicializiranje filmovi.txt
+    FILE *fileFilmovi = fopen("filmovi.txt", "r");
+    if (fileFilmovi != NULL)
     {
-        
+        while (fscanf(fileFilmovi, "%[^,],%d,%[^\n]\n", filmovi[brojacFilmova].ime, &filmovi[brojacFilmova].godina, filmovi[brojacFilmova].zanr) != EOF)
+        {
+            brojacFilmova++;
+        }
+		fclose(fileFilmovi);
     }else{
         printf("Nemoguce otvoriti file.");
-        fclose(filmovi);
-        return 1;
     }
     
-
-
     int odabir;
 
-    //izbornik -----------------------------------------
-
-    printf("BAZA PODATAKA KINA -- FILMOVI\n\n");
-    printf("Odaberite opcu koju zelite: \n");
-    printf("1. Ispis trenutno dostupnih filmova. \n");
-    printf("2. Dodavanje filma. \n");
-    printf("3. Brisanje filma. \n");
-    printf("4. Sortiranje filmova po godinama izdanja. \n");
-    printf("5. Sortiranje filmova po zanru. \n");
-    printf("6. Zatvaranje programa. \n\n");
-    printf("Izbor: ");
-
-    //odabir -----------------------------------------------
+	printf("BAZA PODATAKA KINA -- FILMOVI\n\n");
 
     do
     {
+		//izbornik -----------------------------------------
 
+		printf("\nOdaberite opcu koju zelite: \n");
+		printf("1. Ispis trenutno dostupnih filmova. \n");
+		printf("2. Dodavanje filma. \n");
+		printf("3. Brisanje filma. \n");
+		printf("4. Sortiranje filmova po godinama izdanja. \n");
+		printf("5. Sortiranje filmova po zanru. \n");
+		printf("6. Izaberite za zatvaranje programa. \n\n");
+		printf("Izbor: ");
+
+		//odabir -----------------------------------------------
+
+        scanf_s("%d", &odabir);
         switch (odabir)
     {
         case 1:
-            //dawda
+            ispisFilmova(filmovi, brojacFilmova);
         break;
 
         case 2:
-            // statements
+            dodajFilm(filmovi, &brojacFilmova, maxFilms);
         break;
 
         case 3:
-            //dawda
+            brisiFilm(filmovi, &brojacFilmova);
         break;
 
         case 4:
-            // statements
+			sortGodina(filmovi, brojacFilmova);
         break;
 
         case 5:
-            //dawda
+			sortZanr(filmovi, brojacFilmova);
         break;
 
         case 6:
-            // statements
+			close(filmovi);
         break;
 
         default:
             printf("Krivi unos -- unesite brojeve 1-6\n");
     }
 
-    } while (odabir == 6);
+    } while (odabir != 6);
 
 
     return 0;
