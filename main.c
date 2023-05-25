@@ -39,7 +39,7 @@ int main(){
     int odabir;
 
 	printf("BAZA PODATAKA KINA -- FILMOVI\n\n");
-
+//8
     do
     {
 		//izbornik -----------------------------------------
