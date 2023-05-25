@@ -1,6 +1,7 @@
 #ifndef HEADER_H   
 #define header_h
 
+//3
 typedef struct{
     char ime[70];
     int godina;
