@@ -3,14 +3,6 @@
 #include <stdlib.h>
 #include "header.h"
 
-//4 6
-void ispisFilmova(FILM* filmovi, int); //ispis filmova
-void dodajFilm(FILM* filmovi, int); //dodavanje filma
-void brisiFilm(FILM filmovi[], int* brojacFilmova); //brisanje filma
-void sortGodina(); // sortiraj prema godinama
-void sortZanr(); //sortiranje po zanreu
-void close(); //zatvaranje programa
-
 int main(){
 
 	//alokacija filmova
@@ -67,7 +59,7 @@ int main(){
         break;
 
         case 3:
-            brisiFilm(filmovi, &brojacFilmova);
+            brisiFilm(filmovi, &brojacFilmova, maxFilms);
         break;
 
         case 4:
