@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "header.h"
 
-//4
+//4 6
 void ispisFilmova(FILM* filmovi, int); //ispis filmova
 void dodajFilm(FILM* filmovi, int); //dodavanje filma
 void brisiFilm(FILM filmovi[], int* brojacFilmova); //brisanje filma
