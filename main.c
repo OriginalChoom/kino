@@ -15,11 +15,11 @@ int main(){
 	}
     int brojacFilmova = 0;
 
-	//inicializiranje filmovi.txt
-    FILE *fileFilmovi = fopen("filmovi.txt", "r");
+	//inicializiranje filmovi.txt 
+    FILE *fileFilmovi = fopen("E:\\Kino\\kino\\filmovi.txt", "r"); //moro stavit cijelu adresu vs code nije htio drugacije
     if (fileFilmovi != NULL)
     {
-        while (fscanf(fileFilmovi, "%[^,],%d,%[^\n]\n", filmovi[brojacFilmova].ime, &filmovi[brojacFilmova].godina, filmovi[brojacFilmova].zanr) != EOF)
+        while (fscanf(fileFilmovi, "%[^,],%d,%[^\n]\n", filmovi[brojacFilmova].ime, &filmovi[brojacFilmova].godina, filmovi[brojacFilmova].zanr) != EOF) //pise u filmovi struct redosljedom ime>godina>zanr -- to sve radi dok ne dode do EOF(end of file)
         {
             brojacFilmova++;
         }
@@ -31,11 +31,12 @@ int main(){
     int odabir;
 
 	printf("BAZA PODATAKA KINA -- FILMOVI\n\n");
-//8
+
     do
     {
 		//izbornik -----------------------------------------
 
+        printf("--------------------------------------------------------");
 		printf("\nOdaberite opcu koju zelite: \n");
 		printf("1. Ispis trenutno dostupnih filmova. \n");
 		printf("2. Dodavanje filma. \n");
@@ -44,6 +45,7 @@ int main(){
 		printf("5. Sortiranje filmova po zanru. \n");
 		printf("6. Izaberite za zatvaranje programa. \n\n");
 		printf("Izbor: ");
+        printf("--------------------------------------------------------");
 
 		//odabir -----------------------------------------------
 
@@ -51,15 +53,15 @@ int main(){
         switch (odabir)
     {
         case 1:
-            ispisFilmova(filmovi, brojacFilmova);
+            ispisFilmova(filmovi, brojacFilmova); //napravljeno ispisuje sve
         break;
 
         case 2:
-            dodajFilm(filmovi, &brojacFilmova, maxFilms);
+            dodajFilm(&filmovi, &brojacFilmova, &maxFilms); //napraljveno dodaje jedan film
         break;
 
         case 3:
-            brisiFilm(filmovi, &brojacFilmova, maxFilms);
+            brisiFilm(&filmovi, &brojacFilmova, &maxFilms); //napravljeno brise jedan film ovisno o ID-u 
         break;
 
         case 4:

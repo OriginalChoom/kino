@@ -16,8 +16,8 @@ void ispisFilmova(FILM* filmovi, int brojacFilmova){
 		printf("ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 	}
 }
-void dodajFilm(FILM** filmovi, int *brojacFilmova, int *max){
-	if (*brojacFilmova == *max)
+void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
+	if (*brojacFilmova == *maxFilms)
 	{
 		printf("Max filmovi, ne mozemo dodavati vise filmova!\n");
 		return;

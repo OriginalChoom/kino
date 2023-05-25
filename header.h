@@ -1,4 +1,4 @@
-#ifndef HEADER_H   
+#ifndef header_h   
 #define header_h
 
 typedef struct{
