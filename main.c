@@ -36,16 +36,16 @@ int main(){
     {
 		//izbornik -----------------------------------------
 
-        printf("--------------------------------------------------------");
-		printf("\nOdaberite opcu koju zelite: \n");
+        printf("\n--------------------------------------------------------\n");
+		printf("Odaberite opcu koju zelite: \n");
 		printf("1. Ispis trenutno dostupnih filmova. \n");
 		printf("2. Dodavanje filma. \n");
 		printf("3. Brisanje filma. \n");
 		printf("4. Sortiranje filmova po godinama izdanja. \n");
 		printf("5. Sortiranje filmova po zanru. \n");
-		printf("6. Izaberite za zatvaranje programa. \n\n");
-		printf("Izbor: ");
-        printf("--------------------------------------------------------");
+		printf("6. Izaberite za zatvaranje programa. \n");
+        printf("--------------------------------------------------------\n");
+        printf("Izbor: ");
 
 		//odabir -----------------------------------------------
 
@@ -65,15 +65,15 @@ int main(){
         break;
 
         case 4:
-			sortGodina(filmovi, brojacFilmova);
+			sortGodina(filmovi, brojacFilmova); //napravljeno stortira bez problema i u file i na
         break;
 
         case 5:
-			sortZanr(filmovi, brojacFilmova);
+			sortZanr(filmovi, brojacFilmova); //sortira kako treba
         break;
 
         case 6:
-			close(filmovi);
+			close(); //samo return printf
         break;
 
         default:
@@ -82,6 +82,6 @@ int main(){
 
     } while (odabir != 6);
 
-
     return 0;
+    free(fileFilmovi);
 }

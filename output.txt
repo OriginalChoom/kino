@@ -1,0 +1,9 @@
+Lista Filmova: 
+
+ID: 0.  Double Indemity (1944) 		 Zanr: Film-Noir 
+ID: 1.  It's a Wonderfull life (1946) 		 Zanr: Drama 
+ID: 2.  Chinatown (1974) 		 Zanr: Mystery 
+ID: 3.  Saving Private Ryan (1998) 		 Zanr: War 
+ID: 4.  Kill Bill Vol. 1 (2003) 		 Zanr: Action 
+ID: 5.  Fast Five (2011) 		 Zanr: Action 
+ID: 6.  Real Steel (2011) 		 Zanr: Sci-fi 

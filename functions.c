@@ -15,6 +15,21 @@ void ispisFilmova(FILM* filmovi, int brojacFilmova){
 	{
 		printf("ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 	}
+
+	FILE* output = fopen("output.txt", "w"); 
+	if (output == NULL)
+	{
+		printf("Ne moze se otvoriti file!\n");
+		return;
+	}
+	fprintf(output, "Lista Filmova: \n\n");
+	for (int i = 0; i < brojacFilmova; i++)
+	{
+		fprintf(output, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+	}
+	fclose(output);
+	
+
 }
 void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 	if (*brojacFilmova == *maxFilms)
@@ -66,19 +81,40 @@ void brisiFilm(FILM** filmovi, int *brojacFilmova, int* max){
 	printf("Film obrisan!\n");
 } 
 
-void sortGodina(){
-
+void sortGodina(FILM* filmovi, int brojacFilmova){
+	FILM tempFilm;
+	for (int i = 0; i < brojacFilmova - 1; i++)
+	{
+		for (int j = 0; j < brojacFilmova - i - 1; j++)
+		{
+			if (filmovi[j].godina > filmovi[j+1].godina)
+			{
+				tempFilm = filmovi[j];
+				filmovi[j] = filmovi[j+1];
+				filmovi[j+1] = tempFilm;
+			}
+		}
+	}
+	printf("Filmovi su sortirani po godina!");
 
 } 
 
-void sortZanr(){
-
-
-
+void sortZanr(FILM* filmovi, int brojacFilmova){
+	FILM tempZanr;
+	for (int i = 0; i < brojacFilmova - 1; i++)
+	{
+		for (int j = 0; j < brojacFilmova - i - 1; j++)
+		{
+			if (strcmp(filmovi[j].zanr, filmovi[j + 1].zanr) > 0)
+			{
+				tempZanr = filmovi[j];
+				filmovi[j] = filmovi[j + 1];
+				filmovi[j + 1] = tempZanr;
+			}
+		}
+	}
+	printf("Filmovi sortirani prema zanru(A-Z)!");
 } 
-void close(){
-
-
-
-    
+char close(){
+	return printf("Program se zatvara...");    
 } 
