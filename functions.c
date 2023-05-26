@@ -47,6 +47,7 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 	//unosenje godine i provjera pravilnog unosa
 	printf("Unesite fodinu novog filma: ");
 	do
+	{
 		scanf("%d", &noviFilm.godina);
 		if (noviFilm.godina < 1880 || noviFilm.godina > 2025)
 		{
