@@ -43,7 +43,8 @@ int main(){
 		printf("3. Brisanje filma. \n");
 		printf("4. Sortiranje filmova po godinama izdanja. \n");
 		printf("5. Sortiranje filmova po zanru. \n");
-		printf("6. Izaberite za zatvaranje programa. \n");
+        printf("6. Pretrazivanje filmova\n");
+		printf("7. Izaberite za zatvaranje programa. \n");
         printf("--------------------------------------------------------\n");
         printf("Izbor: ");
 
@@ -71,8 +72,12 @@ int main(){
         case 5:
 			sortZanr(filmovi, brojacFilmova); //sortira kako treba
         break;
-
+        
         case 6:
+
+            pretrazivanjeFilmova(filmovi, brojacFilmova);
+
+        case 7:
 			close(); //samo return printf
         break;
 
@@ -80,8 +85,12 @@ int main(){
             printf("Krivi unos -- unesite brojeve 1-6\n");
     }
 
-    } while (odabir != 6);
+    } while (odabir != 7);
 
     return 0;
     free(fileFilmovi);
 }
+
+char close(){
+	return printf("Program se zatvara...");    
+} 
