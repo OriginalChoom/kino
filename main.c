@@ -10,7 +10,7 @@ int main(){
 	FILM* filmovi = malloc(maxFilms * sizeof(FILM));
 	if (filmovi == NULL)
 	{
-		printf("Alokacija ne uspjela");
+		printf("Alokacija nije uspjela");
 		return 1;
 	}
     int brojacFilmova = 0;

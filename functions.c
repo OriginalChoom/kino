@@ -57,14 +57,84 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 	} while (noviFilm.godina < 1880 || noviFilm.godina > 2025);
 	//zavrsetak provjera
 
-	printf("Unesite zanr novog filma: ");
-	scanf(" %[^\n]", noviFilm.zanr);
+	//unosenje zanra -- biranje umjesto samostalno utipkavanje onda je uvijek sve jednako -----------------
+	int odabirZanraFilma;
+	printf("Odaberite zanr novog filma: \n");
+
+	do
+	{
+		printf("--------------------------------------------------------------\n");
+		printf("\nZanrovi na odabir: \n\n");
+		printf("1. Action\t");
+		printf("2. Adventure\n");
+		printf("3. Animation\t");
+		printf("4. Comedy\n");
+		printf("5. Drama\t");
+		printf("6. Film-Noir\n");
+		printf("7. Horror\t");
+		printf("8. Mystery\n");
+		printf("9. Sci-Fi\t");
+		printf("10. War\n");
+		printf("11. Western\t");
+		printf("12. Music\n");
+		printf("--------------------------------------------------------------\n");
+		printf("Odabir: ");
+
+		scanf("%d", &odabirZanraFilma);
+
+		switch (odabirZanraFilma)
+		{
+		case 1:
+			strcpy(noviFilm.zanr, "Action");
+			break;
+		case 2:
+			strcpy(noviFilm.zanr, "Adventure");
+			break;
+		case 3:
+			strcpy(noviFilm.zanr, "Animation");
+			break;
+		case 4:
+			strcpy(noviFilm.zanr, "Comedy");
+			break;
+		case 5:
+			strcpy(noviFilm.zanr, "Drama");
+			break;
+		case 6:
+			strcpy(noviFilm.zanr, "Film-Noir");
+			break;
+		case 7:
+			strcpy(noviFilm.zanr, "Horror");
+			break;
+		case 8:
+			strcpy(noviFilm.zanr, "Mystery");
+			break;
+		case 9:
+			strcpy(noviFilm.zanr, "Sci-Fi");
+			break;
+		case 10:
+			strcpy(noviFilm.zanr, "War");
+			break;
+		case 11:
+			strcpy(noviFilm.zanr, "Western");
+			break;
+		case 12:
+			strcpy(noviFilm.zanr, "Music");
+			break;
+		default:
+			printf("Ne postoji zanr! Odaberite iz liste.\n");
+			break;
+		}
+	} while (odabirZanraFilma > 12);
+	
+	//zavrsetak unosa -------------------------------------------------------------------------------
 
 	(*filmovi)[*brojacFilmova] = noviFilm;
 	(*brojacFilmova)++;
 
 	printf("Dodan film.\n");
 }
+
+//scanf(" %[^\n]", noviFilm.zanr); -> ovo bilo za unošenje zanra al bolje odabir onda je uvijek isto
 
 void brisiFilm(FILM** filmovi, int *brojacFilmova, int* max){
 	if (*brojacFilmova == 0)
@@ -304,6 +374,7 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 	}
 	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
 
+	//skontat open jedan swtich case za zanrove kao i dodavanja filma u database
 
 	//krece algoritam trazenja
 	int pronadeniFilm;
