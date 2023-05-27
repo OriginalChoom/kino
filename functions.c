@@ -57,7 +57,7 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 	} while (noviFilm.godina < 1880 || noviFilm.godina > 2025);
 	//zavrsetak provjera
 
-	printf("Unesite zanr novog filma(1): ");
+	printf("Unesite zanr novog filma: ");
 	scanf(" %[^\n]", noviFilm.zanr);
 
 	(*filmovi)[*brojacFilmova] = noviFilm;
@@ -140,7 +140,7 @@ void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
 		printf("2. ID\n");
 		printf("3. Godina\n");
 		printf("4. Zanr\n");
-		printf("5. Nista od navedenog -- nazad na prosli izbornik\n");
+		printf("5. Nista od navedenog -- nazad na prosli izbornik\n\n");
 		printf("Izbor: ");
 		scanf("%d", &izborKriterija);
 
@@ -177,17 +177,19 @@ void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
 
 //funkcija izbornika funkcije pretrazivanjeFilmova
 
+
+//IME
 void trazenjeImeFilma(FILM* filmovi, int brojacFilmova){
 	char trazenjeIme[70];
-	printf("Upisite ime filma kojeg trazite(pazite na mala i velika slova): ");
+	printf("\nUpisite ime filma kojeg trazite(pazite na mala i velika slova): ");
 	scanf(" %[^\n]", trazenjeIme);
-
+	printf("\n");
 
 	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
 	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
 	if (pronadeni == NULL)
 	{
-		printf("Ne moze se otvoriti file!\n");
+		printf("\nNe moze se otvoriti file!\n");
 		return;
 	}
 	fprintf(pronadeni, "Film kojeg ste trazili: \n\n");
@@ -201,32 +203,123 @@ void trazenjeImeFilma(FILM* filmovi, int brojacFilmova){
 		{
 			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			pronadeniFilm++;
 		}
 	}
 	if (pronadeniFilm == 0)
 	{
 		printf("U bazi nema filmova s takvim imenom!\n");
+		fprintf(pronadeni,"U bazi nema filmova s takvim imenom!\n");
 	}
 	fclose(pronadeni);
 }
 
+
+//ID
 void trazenjeIDFilma(FILM* filmovi, int brojacFilmova){
+	int trazenjeID;
+	printf("\nUpisite ID filma kojeg trazite: ");
+	scanf("%d", &trazenjeID);
+	printf("\n");
+
+	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	if (pronadeni == NULL)
+	{
+		printf("\nNe moze se otvoriti file!\n");
+		return;
+	}
+	fprintf(pronadeni, "Film kojeg ste trazili: \n\n");
 
 
-
-
+	//krece algoritam trazenja
+	int pronadeniFilm;
+	if (trazenjeID >= 0 && trazenjeID < brojacFilmova) 
+	{
+        	printf("ID: %d. %s (%d) \t Zanr: %s\n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", trazenjeID,filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
+			pronadeniFilm++;
+    }
+	if (pronadeniFilm == 0)
+	{
+		printf("U bazi nema filmova s tim ID-om!\n");
+		fprintf(pronadeni,"U bazi nema filmova s tim ID-om!\n");
+	}
+	fclose(pronadeni);
 }
 
+
+//GODINA
 void trazenjeGodinaFilma(FILM* filmovi, int brojacFilmova){
+	int trazenjeGodina;
+	printf("Upisite godinu filmova koje trazite: ");
+	scanf("%d", &trazenjeGodina);
+	printf("\n");
+
+	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	if (pronadeni == NULL)
+	{
+		printf("\nNe moze se otvoriti file!\n");
+		return;
+	}
+	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
 
 
-
+	//krece algoritam trazenja
+	int pronadeniFilm;
+	for (int i = 0; i < brojacFilmova; i++)
+	{
+		if (trazenjeGodina == filmovi[i].godina)
+		{
+			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			pronadeniFilm++;
+		}
+	}
+	if (pronadeniFilm == 0)
+	{
+		printf("U bazi nema filmova s takvim imenom!\n");
+		fprintf(pronadeni,"U bazi nema filmova koji odgovaraju odabranom zanru!\n");
+	}
+	fclose(pronadeni);
 }
 
+
+//ZANR
 void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
+	char trazenjeZanr[15];
+	printf("Upisite zanr filma kojeg trazite(pazite na mala i velika slova): ");
+	scanf(" %[^\n]", trazenjeZanr);
+	printf("\n");
+
+	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	if (pronadeni == NULL)
+	{
+		printf("\nNe moze se otvoriti file!\n");
+		return;
+	}
+	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
 
 
-
+	//krece algoritam trazenja
+	int pronadeniFilm;
+	for (int i = 0; i < brojacFilmova; i++)
+	{
+		if (strcmp(filmovi[i].zanr, trazenjeZanr) == 0)	
+		{
+			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			pronadeniFilm++;
+		}
+	}
+	if (pronadeniFilm == 0)
+	{
+		printf("U bazi nema filmova s takvim imenom!\n");
+		fprintf(pronadeni,"U bazi nema filmova koji odgovaraju odabranom zanru!\n");
+	}
+	fclose(pronadeni);
 
 }
 
@@ -234,5 +327,5 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 //izbornici zavrsavanje programa
 
 char zavrseteTrazenjaFilma(){
-	return printf("Vraćanje na pocetni izbornik...\n");
+	return printf("\nVracanje na pocetni izbornik...\n\n");
 }
