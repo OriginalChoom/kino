@@ -24,7 +24,7 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova);
 
 //funkcije za zatvaranje programa
 char zavrseteTrazenjaFilma();       //nalazi se u funckiji pretrazivanjefilmova
-char close();
+char close();                       //nalazi se u main
 
 #endif 
 

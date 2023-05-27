@@ -135,12 +135,14 @@ void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
 	{
 		//izbornik za pretrazivanje
 		printf("\n");
+		printf("---------------------------------------------------------------\n");
 		printf("Po kojem kriteriju zelite pretrazivati filmove: \n");
-		printf("1. Ime\n");
-		printf("2. ID\n");
-		printf("3. Godina\n");
-		printf("4. Zanr\n");
-		printf("5. Nista od navedenog -- nazad na prosli izbornik\n\n");
+		printf("1. Pretrazivanje po IMENU filma\n");
+		printf("2. Pretrazivanje po ID-u filma\n");
+		printf("3. Pretrazivanje po GODINI filma\n");
+		printf("4. Pretrazivanje po ZANRU filma\n");
+		printf("5. Nista od navedenog -- nazad na prosli izbornik\n");
+		printf("---------------------------------------------------------------\n");
 		printf("Izbor: ");
 		scanf("%d", &izborKriterija);
 
@@ -192,7 +194,7 @@ void trazenjeImeFilma(FILM* filmovi, int brojacFilmova){
 		printf("\nNe moze se otvoriti file!\n");
 		return;
 	}
-	fprintf(pronadeni, "Film kojeg ste trazili: \n\n");
+	fprintf(pronadeni, "Filmovi koje ste trazili: \n\n");
 
 
 	//krece algoritam trazenja
@@ -229,7 +231,7 @@ void trazenjeIDFilma(FILM* filmovi, int brojacFilmova){
 		printf("\nNe moze se otvoriti file!\n");
 		return;
 	}
-	fprintf(pronadeni, "Film kojeg ste trazili: \n\n");
+	fprintf(pronadeni, "Filmovi koje ste trazili: \n\n");
 
 
 	//krece algoritam trazenja
@@ -263,7 +265,7 @@ void trazenjeGodinaFilma(FILM* filmovi, int brojacFilmova){
 		printf("\nNe moze se otvoriti file!\n");
 		return;
 	}
-	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
+	fprintf(pronadeni, "Filmovi koje ste trazili: \n\n");
 
 
 	//krece algoritam trazenja
@@ -279,8 +281,8 @@ void trazenjeGodinaFilma(FILM* filmovi, int brojacFilmova){
 	}
 	if (pronadeniFilm == 0)
 	{
-		printf("U bazi nema filmova s takvim imenom!\n");
-		fprintf(pronadeni,"U bazi nema filmova koji odgovaraju odabranom zanru!\n");
+		printf("U bazi nema filmova iz te godine!\n");
+		fprintf(pronadeni,"U bazi nema filmova iz te godine!\n");
 	}
 	fclose(pronadeni);
 }
@@ -320,10 +322,7 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 		fprintf(pronadeni,"U bazi nema filmova koji odgovaraju odabranom zanru!\n");
 	}
 	fclose(pronadeni);
-
 }
-
-
 //izbornici zavrsavanje programa
 
 char zavrseteTrazenjaFilma(){
