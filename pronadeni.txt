@@ -1,3 +1,5 @@
-Filmovi koje ste trazili: 
+Film/ovi koje/g ste trazili: 
 
-ID: 5.  Chinatown (1974) 		 Zanr: Mystery 
+ID: 1.  Kill Bill Vol. 1 (2003) 		 Zanr: Action 
+ID: 5.  Predator (1987) 		 Zanr: Action 
+ID: 6.  Fast Five (2011) 		 Zanr: Action 

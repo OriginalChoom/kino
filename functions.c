@@ -429,7 +429,7 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 			printf("Ne postoji zanr! Odaberite iz liste.\n");
 			break;
 		}
-	} while (trazenjeZanr > 12);
+	} while (trazenjeZanrOdabir > 12);
 
 	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
 	FILE* pronadeni = fopen("pronadeni.txt", "w"); 

@@ -7,4 +7,3 @@ ID: 3.  Saving Private Ryan (1998) 		 Zanr: War
 ID: 4.  Double Indemity (1944) 		 Zanr: Film-Noir 
 ID: 5.  Predator (1987) 		 Zanr: Action 
 ID: 6.  Fast Five (2011) 		 Zanr: Action 
-ID: 7.  Chinatown (1974) 		 Zanr: Mystery 
