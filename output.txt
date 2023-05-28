@@ -1,9 +1,8 @@
 Lista Filmova: 
 
-ID: 0.  It's a Wonderfull life (1946) 		 Zanr: Drama 
-ID: 1.  Kill Bill Vol. 1 (2003) 		 Zanr: Action 
+ID: 0.  It's a Wonderfull life (1946) 		 Zanr: Drama,2D 
+ID: 1.  Kill Bill Vol. 1 (2003) 		 Zanr: Action,2D 
 ID: 2.  Real Steel (2011) 		 Zanr: Sci-fi 
 ID: 3.  Saving Private Ryan (1998) 		 Zanr: War 
 ID: 4.  Double Indemity (1944) 		 Zanr: Film-Noir 
 ID: 5.  Predator (1987) 		 Zanr: Action 
-ID: 6.  Fast Five (2011) 		 Zanr: Action 

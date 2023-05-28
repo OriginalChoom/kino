@@ -31,12 +31,12 @@ int main(){
     int odabir;
 
 	printf("BAZA PODATAKA KINA -- FILMOVI\n");
-    printf("Maksimalni broj filmova u bazi %d\n", maxFilms);
+    printf("Maksimalni broj filmova u bazi %d", maxFilms);
     do
     {
 		//izbornik -----------------------------------------
 
-        printf("--------------------------------------------------------\n");
+        printf("\n--------------------------------------------------------\n");
 		printf("Odaberite opcu koju zelite: \n");
 		printf("1. Ispis trenutno dostupnih filmova. \n");
 		printf("2. Dodavanje filma. \n");
@@ -85,7 +85,7 @@ int main(){
             break;
 
         case 8:
-            smanjenjeBaze(&filmovi, &maxFilms);
+            smanjenjeBaze(&filmovi, &maxFilms, &brojacFilmova);
             break;
 
         case 9:

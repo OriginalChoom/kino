@@ -1,5 +1,5 @@
-It's a Wonderfull life,1946,Drama
-Kill Bill Vol. 1,2003,Action
+It's a Wonderfull life,1946,Drama,2D
+Kill Bill Vol. 1,2003,Action,2D
 Real Steel,2011,Sci-fi
 Saving Private Ryan,1998,War
 Double Indemity,1944,Film-Noir

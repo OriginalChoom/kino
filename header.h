@@ -13,7 +13,7 @@ void brisiFilm(FILM** filmovi, int* brojacFilmova, int* maxFilms);
 void sortGodina(FILM* filmovi, int brojacFilmova); 
 void sortZanr(FILM* filmovi, int brojacFilmova); 
 void povecanjeBaze(FILM** filmovi, int *maxFilms);
-void smanjenjeBaze(FILM** filmovi, int *maxFilms);
+void smanjenjeBaze(FILM** filmovi, int *maxFilms, int *brojacFilmova);
 
 //posebne funkcije za pretrazivajne
 void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova); //ova je jos u mainu

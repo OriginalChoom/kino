@@ -13,7 +13,7 @@ void ispisFilmova(FILM* filmovi, int brojacFilmova){
 	printf("\nLista filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		printf("ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+		printf("ID: %d.  %s (%d) \t\t Zanr: %s\n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 	}
 
 	FILE* output = fopen("output.txt", "w"); 
@@ -226,7 +226,7 @@ void povecanjeBaze(FILM** filmovi, int* maxFilms){
 	*maxFilms = noviMaxFilms;
 }
 
-void smanjenjeBaze(FILM** filmovi, int* maxFilms){
+void smanjenjeBaze(FILM** filmovi, int* maxFilms, int* brojacFilmova){
 	int smanjenje;
 	int *pSmanjenje;
 	int noviMaxFilms;
@@ -244,6 +244,13 @@ void smanjenjeBaze(FILM** filmovi, int* maxFilms){
 	
 	noviMaxFilms = *maxFilms - smanjenje;
 
+	int izbrisaniFilmovi = *brojacFilmova - noviMaxFilms;
+	if (noviMaxFilms < *brojacFilmova)
+	{
+		printf("Neki filmovi ce biti izbrisani!!! Broj izbrisanih filmova: %d\n", izbrisaniFilmovi);
+		*brojacFilmova = noviMaxFilms;
+	}
+	
 	FILM* noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
 	if (noviFilmovi == NULL)
 	{
@@ -252,7 +259,7 @@ void smanjenjeBaze(FILM** filmovi, int* maxFilms){
 	}
 
 	printf("Novi maksimalni broj filmova je: %d\n", noviMaxFilms);
-	
+
 	*filmovi = noviFilmovi;
 	*maxFilms = noviMaxFilms;
 }
