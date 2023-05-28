@@ -360,10 +360,76 @@ void trazenjeGodinaFilma(FILM* filmovi, int brojacFilmova){
 
 //ZANR
 void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
+	int trazenjeZanrOdabir;
 	char trazenjeZanr[15];
-	printf("Upisite zanr filma kojeg trazite(pazite na mala i velika slova): ");
-	scanf(" %[^\n]", trazenjeZanr);
+
+	printf("Unesite zanr kojeg zelite traziti: ");
 	printf("\n");
+
+	do
+	{
+		printf("--------------------------------------------------------------\n");
+		printf("\nZanrovi na odabir: \n\n");
+		printf("1. Action\t");
+		printf("2. Adventure\n");
+		printf("3. Animation\t");
+		printf("4. Comedy\n");
+		printf("5. Drama\t");
+		printf("6. Film-Noir\n");
+		printf("7. Horror\t");
+		printf("8. Mystery\n");
+		printf("9. Sci-Fi\t");
+		printf("10. War\n");
+		printf("11. Western\t");
+		printf("12. Music\n");
+		printf("--------------------------------------------------------------\n");
+		printf("Odabir: ");
+
+		scanf("%d", &trazenjeZanrOdabir);
+
+		switch (trazenjeZanrOdabir)
+		{
+		case 1:
+			strcpy(trazenjeZanr, "Action");
+			break;
+		case 2:
+			strcpy(trazenjeZanr, "Adventure");
+			break;
+		case 3:
+			strcpy(trazenjeZanr, "Animation");
+			break;
+		case 4:
+			strcpy(trazenjeZanr, "Comedy");
+			break;
+		case 5:
+			strcpy(trazenjeZanr, "Drama");
+			break;
+		case 6:
+			strcpy(trazenjeZanr, "Film-Noir");
+			break;
+		case 7:
+			strcpy(trazenjeZanr, "Horror");
+			break;
+		case 8:
+			strcpy(trazenjeZanr, "Mystery");
+			break;
+		case 9:
+			strcpy(trazenjeZanr, "Sci-Fi");
+			break;
+		case 10:
+			strcpy(trazenjeZanr, "War");
+			break;
+		case 11:
+			strcpy(trazenjeZanr, "Western");
+			break;
+		case 12:
+			strcpy(trazenjeZanr, "Music");
+			break;
+		default:
+			printf("Ne postoji zanr! Odaberite iz liste.\n");
+			break;
+		}
+	} while (trazenjeZanr > 12);
 
 	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
 	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
@@ -374,8 +440,6 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 	}
 	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
 
-	//skontat open jedan swtich case za zanrove kao i dodavanja filma u database
-
 	//krece algoritam trazenja
 	int pronadeniFilm;
 	for (int i = 0; i < brojacFilmova; i++)
@@ -384,7 +448,7 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 		{
 			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			pronadeniFilm++;
+			pronadeniFilm++; 
 		}
 	}
 	if (pronadeniFilm == 0)
