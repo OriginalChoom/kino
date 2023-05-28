@@ -29,14 +29,14 @@ int main(){
     }
     
     int odabir;
-    
-	printf("BAZA PODATAKA KINA -- FILMOVI\n\n");
 
+	printf("BAZA PODATAKA KINA -- FILMOVI\n");
+    printf("Maksimalni broj filmova u bazi %d\n", maxFilms);
     do
     {
 		//izbornik -----------------------------------------
 
-        printf("\n--------------------------------------------------------\n");
+        printf("--------------------------------------------------------\n");
 		printf("Odaberite opcu koju zelite: \n");
 		printf("1. Ispis trenutno dostupnih filmova. \n");
 		printf("2. Dodavanje filma. \n");
@@ -44,7 +44,10 @@ int main(){
 		printf("4. Sortiranje filmova po godinama izdanja. \n");
 		printf("5. Sortiranje filmova po zanru. \n");
         printf("6. Pretrazivanje filmova\n");
-		printf("7. Izaberite za zatvaranje programa. \n");
+        printf("7. Povecanje baze. \n");
+        printf("8. Smanjenje baze. \n");
+        printf("9. Provjera velicine baze. \n");
+		printf("10. Izaberite za zatvaranje programa. \n");
         printf("--------------------------------------------------------\n");
         printf("Izbor: ");
 
@@ -74,18 +77,29 @@ int main(){
         break;
         
         case 6:
-
             pretrazivanjeFilmova(filmovi, brojacFilmova);
-
+            break;
+        
         case 7:
+            povecanjeBaze(&filmovi, &maxFilms);
+            break;
+
+        case 8:
+            smanjenjeBaze(&filmovi, &maxFilms);
+            break;
+
+        case 9:
+            printf("Trenutna velicina baze: %d\n", maxFilms);
+            break;
+
+        case 10:
 			close(); //samo return printf
         break;
 
         default:
             printf("Krivi unos -- unesite brojeve 1-6\n");
     }
-
-    } while (odabir != 7);
+    } while (odabir != 10);
 
     return 0;
     free(fileFilmovi);

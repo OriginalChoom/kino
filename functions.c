@@ -196,6 +196,67 @@ void sortZanr(FILM* filmovi, int brojacFilmova){
 	printf("Filmovi sortirani prema zanru(A-Z)!");
 } 
 
+void povecanjeBaze(FILM** filmovi, int* maxFilms){
+	int povecanje;
+	int noviMaxFilms;
+	printf("Za koliko mjesta zelite povecati bazu: ");
+	do
+	{
+		scanf("%d", &povecanje);
+		if (povecanje < 0)
+		{
+			printf("Povecanje znaci 1 ili vise! Nema smanjivanje baze.\n");
+			printf("Za koliko mjesta zelite povecati bazu: ");
+		}
+		
+	} while (povecanje < 0);
+	
+	noviMaxFilms = *maxFilms + povecanje;
+
+	FILM* noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
+	if (noviFilmovi == NULL)
+	{
+		printf("Pogreška u relokaciji memorije\n");
+		return;
+	}
+
+	printf("Novi maksimalni broj filmova je: %d\n", noviMaxFilms);
+	
+	*filmovi = noviFilmovi;
+	*maxFilms = noviMaxFilms;
+}
+
+void smanjenjeBaze(FILM** filmovi, int* maxFilms){
+	int smanjenje;
+	int *pSmanjenje;
+	int noviMaxFilms;
+	printf("Za koliko mjesta zelite smanjiti bazu(moguce brisanje filmova!): ");
+	do
+	{
+		scanf("%d", &smanjenje);
+		pSmanjenje = &smanjenje;
+		if (smanjenje <= 0 || *pSmanjenje > *maxFilms)
+		{
+			printf("Los unos, mora biti veci od 0.\n");
+			printf("Za koliko mjesta zelite smanjiti bazu: ");
+		}
+	} while (smanjenje <= 0 || *pSmanjenje > *maxFilms);
+	
+	noviMaxFilms = *maxFilms - smanjenje;
+
+	FILM* noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
+	if (noviFilmovi == NULL)
+	{
+		printf("Pogreška u relokaciji memorije\n");
+		return;
+	}
+
+	printf("Novi maksimalni broj filmova je: %d\n", noviMaxFilms);
+	
+	*filmovi = noviFilmovi;
+	*maxFilms = noviMaxFilms;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 
 void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
