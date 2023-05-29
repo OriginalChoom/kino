@@ -4,7 +4,8 @@
 #include <string.h>
 #include "header.h"
 
-void ispisFilmova(FILM* filmovi, int brojacFilmova){
+void ispisFilmova(FILM *filmovi, int brojacFilmova)
+{
 	if (brojacFilmova == 0)
 	{
 		printf("Nema filmova za pokazati.");
@@ -13,10 +14,10 @@ void ispisFilmova(FILM* filmovi, int brojacFilmova){
 	printf("\nLista filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		printf("ID: %d.  %s (%d) \t\t Zanr: %s\n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+		printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].placanjeUlaz);
 	}
 
-	FILE* output = fopen("output.txt", "w"); 
+	FILE *output = fopen("output.txt", "w");
 	if (output == NULL)
 	{
 		printf("Ne moze se otvoriti file!\n");
@@ -25,13 +26,12 @@ void ispisFilmova(FILM* filmovi, int brojacFilmova){
 	fprintf(output, "Lista Filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		fprintf(output, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+		fprintf(output, "ID: %d.  %s (%d) \t\t Zanr: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].placanjeUlaz);
 	}
 	fclose(output);
-	
-
 }
-void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
+void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
+{
 	if (*brojacFilmova == *maxFilms)
 	{
 		printf("Max filmovi, ne mozemo dodavati vise filmova!\n");
@@ -44,7 +44,7 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 	printf("Unesite ime novog filma: ");
 	scanf(" %[^\n]", noviFilm.ime);
 
-	//unosenje godine i provjera pravilnog unosa
+	// unosenje godine i provjera pravilnog unosa
 	printf("Unesite fodinu novog filma: ");
 	do
 	{
@@ -53,11 +53,11 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 		{
 			printf("Nije moguca godina filma, upise ponovno!\n");
 		}
-		
-	} while (noviFilm.godina < 1880 || noviFilm.godina > 2025);
-	//zavrsetak provjera
 
-	//unosenje zanra -- biranje umjesto samostalno utipkavanje onda je uvijek sve jednako -----------------
+	} while (noviFilm.godina < 1880 || noviFilm.godina > 2025);
+	// zavrsetak provjera
+
+	// unosenje zanra -- biranje umjesto samostalno utipkavanje onda je uvijek sve jednako -----------------
 	int odabirZanraFilma;
 	printf("Odaberite zanr novog filma: \n");
 
@@ -125,8 +125,22 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 			break;
 		}
 	} while (odabirZanraFilma > 12);
-	
-	//zavrsetak unosa -------------------------------------------------------------------------------
+
+	double cijenaUlaza;
+	printf("Unesite cijenu ulaza u kino: ");
+	do
+	{
+		scanf("%lf", &cijenaUlaza);
+		noviFilm.placanjeUlaz = cijenaUlaza;
+		if (cijenaUlaza < 0 || cijenaUlaza > 100)
+		{
+			printf("Cijena mora biti razumna(0-100).\n");
+			printf("Unesite cijenu: ");
+		}
+
+	} while (cijenaUlaza < 0 || cijenaUlaza > 100);
+
+	// zavrsetak unosa -------------------------------------------------------------------------------
 
 	(*filmovi)[*brojacFilmova] = noviFilm;
 	(*brojacFilmova)++;
@@ -134,58 +148,62 @@ void dodajFilm(FILM** filmovi, int *brojacFilmova, int *maxFilms){
 	printf("Dodan film.\n");
 }
 
-//scanf(" %[^\n]", noviFilm.zanr); -> ovo bilo za unošenje zanra al bolje odabir onda je uvijek isto
+// scanf(" %[^\n]", noviFilm.zanr); -> ovo bilo za unošenje zanra al bolje odabir onda je uvijek isto
 
-void brisiFilm(FILM** filmovi, int *brojacFilmova, int* max){
+void brisiFilm(FILM **filmovi, int *brojacFilmova, int *max)
+{
 	if (*brojacFilmova == 0)
 	{
 		printf("Nema filmova u bazi!");
 		return;
 	}
-		
+
 	printf("Unesite index filma kojeg zelite obrisati: \n");
 	int index;
-	
+
 	do
 	{
 		scanf("%d", &index);
-		if (index < 0 || index >= *brojacFilmova) {
-            printf("Index ne postoji, pokušajte opet.\n");
-        }
-	} while(index < 0 || index >= *brojacFilmova);
+		if (index < 0 || index >= *brojacFilmova)
+		{
+			printf("Index ne postoji, pokušajte opet.\n");
+		}
+	} while (index < 0 || index >= *brojacFilmova);
 
-	for (int i = index; i < *brojacFilmova - 1; i++) {
+	for (int i = index; i < *brojacFilmova - 1; i++)
+	{
 		(*filmovi)[i] = (*filmovi)[i + 1];
 	}
 	(*brojacFilmova)--;
 	printf("Film obrisan!\n");
-} 
+}
 
-void sortGodina(FILM* filmovi, int brojacFilmova){
+void sortGodina(FILM *filmovi, int brojacFilmova)
+{
 	FILM tempFilm;
 	for (int i = 0; i < brojacFilmova - 1; i++)
 	{
 		for (int j = 0; j < brojacFilmova - i - 1; j++)
 		{
-			if (filmovi[j].godina > filmovi[j+1].godina)
+			if (filmovi[j].godina > filmovi[j + 1].godina)
 			{
 				tempFilm = filmovi[j];
-				filmovi[j] = filmovi[j+1];
-				filmovi[j+1] = tempFilm;
+				filmovi[j] = filmovi[j + 1];
+				filmovi[j + 1] = tempFilm;
 			}
 		}
 	}
 	printf("Filmovi su sortirani po godina!");
+}
 
-} 
-
-void sortZanr(FILM* filmovi, int brojacFilmova){
+void sortZanr(FILM *filmovi, int brojacFilmova)
+{
 	FILM tempZanr;
 	for (int i = 0; i < brojacFilmova - 1; i++)
 	{
 		for (int j = 0; j < brojacFilmova - i - 1; j++)
 		{
-			if (strcmp(filmovi[j].zanr, filmovi[j + 1].zanr) > 0) //srtcmp dosl samo compare-a ascii vrijednosti prvog i drugog zanra i onda ranka
+			if (strcmp(filmovi[j].zanr, filmovi[j + 1].zanr) > 0) // srtcmp dosl samo compare-a ascii vrijednosti prvog i drugog zanra i onda ranka
 			{
 				tempZanr = filmovi[j];
 				filmovi[j] = filmovi[j + 1];
@@ -194,9 +212,10 @@ void sortZanr(FILM* filmovi, int brojacFilmova){
 		}
 	}
 	printf("Filmovi sortirani prema zanru(A-Z)!");
-} 
+}
 
-void povecanjeBaze(FILM** filmovi, int* maxFilms){
+void povecanjeBaze(FILM **filmovi, int *maxFilms)
+{
 	int povecanje;
 	int noviMaxFilms;
 	printf("Za koliko mjesta zelite povecati bazu: ");
@@ -208,12 +227,12 @@ void povecanjeBaze(FILM** filmovi, int* maxFilms){
 			printf("Povecanje znaci 1 ili vise! Nema smanjivanje baze.\n");
 			printf("Za koliko mjesta zelite povecati bazu: ");
 		}
-		
+
 	} while (povecanje < 0);
-	
+
 	noviMaxFilms = *maxFilms + povecanje;
 
-	FILM* noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
+	FILM *noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
 	if (noviFilmovi == NULL)
 	{
 		printf("Pogreška u relokaciji memorije\n");
@@ -221,12 +240,13 @@ void povecanjeBaze(FILM** filmovi, int* maxFilms){
 	}
 
 	printf("Novi maksimalni broj filmova je: %d\n", noviMaxFilms);
-	
+
 	*filmovi = noviFilmovi;
 	*maxFilms = noviMaxFilms;
 }
 
-void smanjenjeBaze(FILM** filmovi, int* maxFilms, int* brojacFilmova){
+void smanjenjeBaze(FILM **filmovi, int *maxFilms, int *brojacFilmova)
+{
 	int smanjenje;
 	int *pSmanjenje;
 	int noviMaxFilms;
@@ -241,7 +261,7 @@ void smanjenjeBaze(FILM** filmovi, int* maxFilms, int* brojacFilmova){
 			printf("Za koliko mjesta zelite smanjiti bazu: ");
 		}
 	} while (smanjenje <= 0 || *pSmanjenje > *maxFilms);
-	
+
 	noviMaxFilms = *maxFilms - smanjenje;
 
 	int izbrisaniFilmovi = *brojacFilmova - noviMaxFilms;
@@ -250,8 +270,8 @@ void smanjenjeBaze(FILM** filmovi, int* maxFilms, int* brojacFilmova){
 		printf("Neki filmovi ce biti izbrisani!!! Broj izbrisanih filmova: %d\n", izbrisaniFilmovi);
 		*brojacFilmova = noviMaxFilms;
 	}
-	
-	FILM* noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
+
+	FILM *noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
 	if (noviFilmovi == NULL)
 	{
 		printf("Pogreška u relokaciji memorije\n");
@@ -266,12 +286,13 @@ void smanjenjeBaze(FILM** filmovi, int* maxFilms, int* brojacFilmova){
 
 //---------------------------------------------------------------------------------------------------------------------
 
-void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
+void pretrazivanjeFilmova(FILM *filmovi, int brojacFilmova)
+{
 
 	int izborKriterija;
 	do
 	{
-		//izbornik za pretrazivanje
+		// izbornik za pretrazivanje
 		printf("\n");
 		printf("---------------------------------------------------------------\n");
 		printf("Po kojem kriteriju zelite pretrazivati filmove: \n");
@@ -289,7 +310,7 @@ void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
 		case 1:
 			trazenjeImeFilma(filmovi, brojacFilmova);
 			break;
-		
+
 		case 2:
 			trazenjeIDFilma(filmovi, brojacFilmova);
 			break;
@@ -312,21 +333,20 @@ void pretrazivanjeFilmova(FILM* filmovi, int brojacFilmova){
 		}
 
 	} while (izborKriterija != 5);
-
 }
 
-//funkcija izbornika funkcije pretrazivanjeFilmova
+// funkcija izbornika funkcije pretrazivanjeFilmova
 
-
-//IME
-void trazenjeImeFilma(FILM* filmovi, int brojacFilmova){
+// IME
+void trazenjeImeFilma(FILM *filmovi, int brojacFilmova)
+{
 	char trazenjeIme[70];
 	printf("\nUpisite ime filma kojeg trazite(pazite na mala i velika slova): ");
 	scanf(" %[^\n]", trazenjeIme);
 	printf("\n");
 
-	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
-	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	// odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE *pronadeni = fopen("pronadeni.txt", "w");
 	if (pronadeni == NULL)
 	{
 		printf("\nNe moze se otvoriti file!\n");
@@ -334,36 +354,35 @@ void trazenjeImeFilma(FILM* filmovi, int brojacFilmova){
 	}
 	fprintf(pronadeni, "Filmovi koje ste trazili: \n\n");
 
-
-	//krece algoritam trazenja
+	// krece algoritam trazenja
 	int pronadeniFilm;
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		if (strcmp(filmovi[i].ime, trazenjeIme) == 0)	//opet usporedujemo tocnije filmovi[i].ime - trazenjeIme -- znaci ascii vrijednosti se oduzimaju ako je 0 rezultat znaci da je ime trazeno isto kao ime filma
+		if (strcmp(filmovi[i].ime, trazenjeIme) == 0) // opet usporedujemo tocnije filmovi[i].ime - trazenjeIme -- znaci ascii vrijednosti se oduzimaju ako je 0 rezultat znaci da je ime trazeno isto kao ime filma
 		{
 			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 			pronadeniFilm++;
 		}
 	}
 	if (pronadeniFilm == 0)
 	{
 		printf("U bazi nema filmova s takvim imenom!\n");
-		fprintf(pronadeni,"U bazi nema filmova s takvim imenom!\n");
+		fprintf(pronadeni, "U bazi nema filmova s takvim imenom!\n");
 	}
 	fclose(pronadeni);
 }
 
-
-//ID
-void trazenjeIDFilma(FILM* filmovi, int brojacFilmova){
+// ID
+void trazenjeIDFilma(FILM *filmovi, int brojacFilmova)
+{
 	int trazenjeID;
 	printf("\nUpisite ID filma kojeg trazite: ");
 	scanf("%d", &trazenjeID);
 	printf("\n");
 
-	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
-	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	// odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE *pronadeni = fopen("pronadeni.txt", "w");
 	if (pronadeni == NULL)
 	{
 		printf("\nNe moze se otvoriti file!\n");
@@ -371,33 +390,32 @@ void trazenjeIDFilma(FILM* filmovi, int brojacFilmova){
 	}
 	fprintf(pronadeni, "Filmovi koje ste trazili: \n\n");
 
-
-	//krece algoritam trazenja
+	// krece algoritam trazenja
 	int pronadeniFilm;
-	if (trazenjeID >= 0 && trazenjeID < brojacFilmova) 
+	if (trazenjeID >= 0 && trazenjeID < brojacFilmova)
 	{
-        	printf("ID: %d. %s (%d) \t Zanr: %s\n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", trazenjeID,filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
-			pronadeniFilm++;
-    }
+		printf("ID: %d. %s (%d) \t Zanr: %s\n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
+		fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
+		pronadeniFilm++;
+	}
 	if (pronadeniFilm == 0)
 	{
 		printf("U bazi nema filmova s tim ID-om!\n");
-		fprintf(pronadeni,"U bazi nema filmova s tim ID-om!\n");
+		fprintf(pronadeni, "U bazi nema filmova s tim ID-om!\n");
 	}
 	fclose(pronadeni);
 }
 
-
-//GODINA
-void trazenjeGodinaFilma(FILM* filmovi, int brojacFilmova){
+// GODINA
+void trazenjeGodinaFilma(FILM *filmovi, int brojacFilmova)
+{
 	int trazenjeGodina;
 	printf("Upisite godinu filmova koje trazite: ");
 	scanf("%d", &trazenjeGodina);
 	printf("\n");
 
-	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
-	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	// odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE *pronadeni = fopen("pronadeni.txt", "w");
 	if (pronadeni == NULL)
 	{
 		printf("\nNe moze se otvoriti file!\n");
@@ -405,29 +423,28 @@ void trazenjeGodinaFilma(FILM* filmovi, int brojacFilmova){
 	}
 	fprintf(pronadeni, "Filmovi koje ste trazili: \n\n");
 
-
-	//krece algoritam trazenja
+	// krece algoritam trazenja
 	int pronadeniFilm;
 	for (int i = 0; i < brojacFilmova; i++)
 	{
 		if (trazenjeGodina == filmovi[i].godina)
 		{
 			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
 			pronadeniFilm++;
 		}
 	}
 	if (pronadeniFilm == 0)
 	{
 		printf("U bazi nema filmova iz te godine!\n");
-		fprintf(pronadeni,"U bazi nema filmova iz te godine!\n");
+		fprintf(pronadeni, "U bazi nema filmova iz te godine!\n");
 	}
 	fclose(pronadeni);
 }
 
-
-//ZANR
-void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
+// ZANR
+void trazenjeZanrFilma(FILM *filmovi, int brojacFilmova)
+{
 	int trazenjeZanrOdabir;
 	char trazenjeZanr[15];
 
@@ -499,8 +516,8 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 		}
 	} while (trazenjeZanrOdabir > 12);
 
-	//odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
-	FILE* pronadeni = fopen("pronadeni.txt", "w"); 
+	// odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
+	FILE *pronadeni = fopen("pronadeni.txt", "w");
 	if (pronadeni == NULL)
 	{
 		printf("\nNe moze se otvoriti file!\n");
@@ -508,26 +525,27 @@ void trazenjeZanrFilma(FILM* filmovi, int brojacFilmova){
 	}
 	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
 
-	//krece algoritam trazenja
+	// krece algoritam trazenja
 	int pronadeniFilm;
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		if (strcmp(filmovi[i].zanr, trazenjeZanr) == 0)	
+		if (strcmp(filmovi[i].zanr, trazenjeZanr) == 0)
 		{
 			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i,filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			pronadeniFilm++; 
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			pronadeniFilm++;
 		}
 	}
 	if (pronadeniFilm == 0)
 	{
 		printf("U bazi nema filmova s takvim imenom!\n");
-		fprintf(pronadeni,"U bazi nema filmova koji odgovaraju odabranom zanru!\n");
+		fprintf(pronadeni, "U bazi nema filmova koji odgovaraju odabranom zanru!\n");
 	}
 	fclose(pronadeni);
 }
-//izbornici zavrsavanje programa
+// izbornici zavrsavanje programa
 
-char zavrseteTrazenjaFilma(){
+char zavrseteTrazenjaFilma()
+{
 	return printf("\nVracanje na pocetni izbornik...\n\n");
 }

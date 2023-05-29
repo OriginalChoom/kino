@@ -1,7 +1,7 @@
-It's a Wonderfull life,1946,Drama,2D
-Kill Bill Vol. 1,2003,Action,2D
-Real Steel,2011,Sci-fi
-Saving Private Ryan,1998,War
-Double Indemity,1944,Film-Noir
-Predator,1987,Action
-Fast Five,2011,Action
+It's a Wonderfull life,1946,Drama,45.5
+Kill Bill Vol. 1,2003,Action,5
+Real Steel,2011,Sci-fi,6
+Saving Private Ryan,1998,War,4.5
+Double Indemity,1944,Film-Noir,5.3
+Predator,1987,Action,5
+Fast Five,2011,Action,5
