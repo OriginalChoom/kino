@@ -26,18 +26,14 @@ int main()
         fseek(fileFilmovi, 0, SEEK_SET); //na pocetak dokumenta
         while (fscanf(fileFilmovi, "%[^,],%d,%[^,],%[^,],%lf\n", filmovi[brojacFilmova].ime, &filmovi[brojacFilmova].godina, filmovi[brojacFilmova].zanr, filmovi[brojacFilmova].nacinGledanja, &filmovi[brojacFilmova].placanjeUlaz) != EOF) // pise u filmovi struct redosljedom ime>godina>zanr -- to sve radi dok ne dode do EOF(end of file)
         {
-            printf("ime: %s, godina: %d\n", filmovi[brojacFilmova].ime, filmovi[brojacFilmova].godina);
             brojacFilmova++;
         }
         fclose(fileFilmovi);
-        printf("jel uspije");
     }
     else
     {
         printf("Nemoguce otvoriti file.");
     }
-
-    printf("Program je proso i otvaranje filea.");
 
     int odabir;
 
