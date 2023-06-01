@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include "header.h"
 
-//za napravit 11, 7
+//za napravit 11 -- tocnije napravit da se ne loopa kad se da slovo umjesto broja
 
 //10 //4
 int main()
 {
-    // alokacija filmova -- 15 -- 14 -- 13
+    //alokacija filmova //15 //14 //13
     int maxFilms = 10;
     FILM *filmovi = malloc(maxFilms * sizeof(FILM));
     if (filmovi == NULL)
@@ -18,7 +18,7 @@ int main()
     }
     int brojacFilmova = 0;
 
-    // inicializiranje filmovi.txt -- 16
+    // inicializiranje filmovi.txt -- //16
     FILE *fileFilmovi = fopen("filmovi.txt", "r"); // moro stavit cijelu adresu vs code nije htio drugacije
     if (fileFilmovi != NULL)
     {
@@ -32,7 +32,7 @@ int main()
     }
     else
     {
-        printf("Nemoguce otvoriti file.");
+        perror("Nemoguce otvoriti file.");
     }
 
     int odabir;
@@ -55,7 +55,7 @@ int main()
         printf("8. Povecanje baze. \n");
         printf("9. Smanjenje baze. \n");
         printf("10. Provjera velicine baze. \n");
-        printf("11. Preimenovanje .txt dokumenta\n");
+        printf("11. Brisanje dokumenta\n");
         printf("12. Izaberite za zatvaranje programa. \n");
         printf("--------------------------------------------------------\n");
         printf("Izbor: ");
@@ -123,7 +123,7 @@ int main()
     free(filmovi); //15
 }
 
-void close()
+inline void close() //7
 {
     printf("Program se zatvara...");
 }

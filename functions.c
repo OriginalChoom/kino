@@ -4,8 +4,8 @@
 #include <string.h>
 #include "header.h"
 
-//10 -- 9
-void ispisFilmova(FILM *filmovi, int brojacFilmova)
+//10  //9
+inline void ispisFilmova(FILM *filmovi, int brojacFilmova) //7
 {
 	if (brojacFilmova == 0)
 	{
@@ -15,7 +15,8 @@ void ispisFilmova(FILM *filmovi, int brojacFilmova)
 	printf("\nLista filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+		printf("ID: %2d.  %-30s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+
 	}
 
 	FILE *output = fopen("output.txt", "w");
@@ -27,7 +28,7 @@ void ispisFilmova(FILM *filmovi, int brojacFilmova)
 	fprintf(output, "Lista Filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		fprintf(output, "ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+		fprintf(output, "ID: %2d.  %-30s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 	}
 	fclose(output);
 }
@@ -341,28 +342,30 @@ void smanjenjeBaze(FILM **filmovi, int *maxFilms, int *brojacFilmova)
 
 //18
 void preimenovanjeDatoteke(){ 
-	FILE *noviFile = fopen("novi.txt", "w");
-    if (noviFile != NULL){
+
+	char ime[] = "novi";
+	FILE *file = fopen(ime, "wb");
+    if (file == NULL){
 		perror("Nemoguce otvoriti file!");
 	}
-	int preimenuj;
+	fclose(file);
+
 	char novoIme[30];
-	printf("Preimenujemo datoteku output.txt!\n");
+	printf("Preimenujemo datoteku!\n");
 	printf("Novo ime: ");
-	scanf("%[^\n]", novoIme);
+	scanf(" %[^\n]", novoIme);
 
-	preimenuj = rename("novi.txt", novoIme);
-
-	if(preimenuj == 0) {
-      printf("\nUspjesno promjenjeno ime file-a.");
-   } else {
-      printf("Greska, nemoguce preimenovanje file-a!");
-   }
-
+	int rezultatPreimenovanja = rename(ime, novoIme);
+	if (rezultatPreimenovanja !=0)
+	{
+		printf("Neuspjesno preimenovanje datoteke.\n");
+	}else{
+	printf("Uspjesna promjena imena. --> Pogledajte novo ime. \n");
+	}
 }
 
-
 //---------------------------------------------------------------------------------------------------------------------
+
 //21
 void pretrazivanjeFilmova(FILM *filmovi, int brojacFilmova)
 {
