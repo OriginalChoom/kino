@@ -1,15 +1,13 @@
 #ifndef header_h
 #define header_h
 
-extern int maxFilms; //5
-
 //3 //6 //1 //2
 typedef struct
 {
     char ime[70]; //12
     int godina;
     char zanr[15]; //12
-    char nacinGledanja[3]; //12
+    char nacinGledanja[5]; //12
     double placanjeUlaz;
 } FILM;
 
@@ -34,6 +32,6 @@ void trazenjeZanrFilma(FILM *filmovi, int brojacFilmova);
 
 // funkcije za zatvaranje programa
 char zavrseteTrazenjaFilma(); // nalazi se u funckiji pretrazivanjefilmova
-char close();                 // nalazi se u main
+void close();                 // nalazi se u main
 
 #endif

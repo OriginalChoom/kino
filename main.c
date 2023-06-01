@@ -26,16 +26,19 @@ int main()
         fseek(fileFilmovi, 0, SEEK_SET); //na pocetak dokumenta
         while (fscanf(fileFilmovi, "%[^,],%d,%[^,],%[^,],%lf\n", filmovi[brojacFilmova].ime, &filmovi[brojacFilmova].godina, filmovi[brojacFilmova].zanr, filmovi[brojacFilmova].nacinGledanja, &filmovi[brojacFilmova].placanjeUlaz) != EOF) // pise u filmovi struct redosljedom ime>godina>zanr -- to sve radi dok ne dode do EOF(end of file)
         {
+            printf("ime: %s, godina: %d\n", filmovi[brojacFilmova].ime, filmovi[brojacFilmova].godina);
             brojacFilmova++;
         }
         fclose(fileFilmovi);
+        printf("jel uspije");
     }
     else
     {
         printf("Nemoguce otvoriti file.");
     }
 
-    char staroIme[] = "output.txt";
+    printf("Program je proso i otvaranje filea.");
+
     int odabir;
 
     printf("BAZA PODATAKA KINA -- FILMOVI\n");
@@ -56,14 +59,14 @@ int main()
         printf("8. Povecanje baze. \n");
         printf("9. Smanjenje baze. \n");
         printf("10. Provjera velicine baze. \n");
-        printf("11. Preimenovanje .txt dokumenta");
+        printf("11. Preimenovanje .txt dokumenta\n");
         printf("12. Izaberite za zatvaranje programa. \n");
         printf("--------------------------------------------------------\n");
         printf("Izbor: ");
 
         // odabir -----------------------------------------------
 
-        scanf("%d", &odabir);
+        scanf(" %d", &odabir);
 
         switch (odabir)
         {
@@ -112,7 +115,7 @@ int main()
             break;
 
         case 12:
-            close(); // samo return printf
+            close(); // samo printf
             break;
 
         default:
@@ -121,10 +124,10 @@ int main()
     } while (odabir != 12);
 
     return 0;
-    free(fileFilmovi); //15
+    free(filmovi); //15
 }
 
-char close()
+void close()
 {
-    return printf("Program se zatvara...");
+    printf("Program se zatvara...");
 }

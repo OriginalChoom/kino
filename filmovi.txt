@@ -3,5 +3,5 @@ Kill Bill Vol. 1,2003,Action,3D,5
 Real Steel,2011,Sci-fi,4D,6
 Saving Private Ryan,1998,War,2D,4.5
 Double Indemity,1944,Film-Noir,2D,5.3
-Predator,1987,Action,,3D,5
 Fast Five,2011,Action,2D,5
+Edge of Tomorrow,2014,Sci-fi,2D,33.3
