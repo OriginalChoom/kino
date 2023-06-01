@@ -7,3 +7,4 @@ ID: 3.  Saving Private Ryan (1998) 		 Zanr: War 	 Ulaz: 4.50kn
 ID: 4.  Double Indemity (1944) 		 Zanr: Film-Noir 	 Ulaz: 5.30kn
 ID: 5.  Predator (1987) 		 Zanr: Action 	 Ulaz: 5.00kn
 ID: 6.  Fast Five (2011) 		 Zanr: Action 	 Ulaz: 5.00kn
+ID: 7.  Chinatown (1974) 		 Zanr: Mystery 	 Ulaz: 54.33kn
