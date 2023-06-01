@@ -4,6 +4,7 @@
 #include <string.h>
 #include "header.h"
 
+//10 -- 9
 void ispisFilmova(FILM *filmovi, int brojacFilmova)
 {
 	if (brojacFilmova == 0)
@@ -14,7 +15,7 @@ void ispisFilmova(FILM *filmovi, int brojacFilmova)
 	printf("\nLista filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].placanjeUlaz);
+		printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 	}
 
 	FILE *output = fopen("output.txt", "w");
@@ -26,7 +27,7 @@ void ispisFilmova(FILM *filmovi, int brojacFilmova)
 	fprintf(output, "Lista Filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		fprintf(output, "ID: %d.  %s (%d) \t\t Zanr: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].placanjeUlaz);
+		fprintf(output, "ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 	}
 	fclose(output);
 }
@@ -45,7 +46,7 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 	scanf(" %[^\n]", noviFilm.ime);
 
 	// unosenje godine i provjera pravilnog unosa
-	printf("Unesite fodinu novog filma: ");
+	printf("Unesite godinu novog filma: ");
 	do
 	{
 		scanf("%d", &noviFilm.godina);
@@ -58,9 +59,10 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 	// zavrsetak provjera
 
 	// unosenje zanra -- biranje umjesto samostalno utipkavanje onda je uvijek sve jednako -----------------
-	int odabirZanraFilma;
+	static int odabirZanraFilma; //5
 	printf("Odaberite zanr novog filma: \n");
 
+	//8
 	do
 	{
 		printf("--------------------------------------------------------------\n");
@@ -126,7 +128,40 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 		}
 	} while (odabirZanraFilma > 12);
 
-	double cijenaUlaza;
+	static int odabirNacinGledanja;
+	printf("Unesite nacin gledanja filma: ");
+	do
+	{
+		printf("\n----------------------------------------------\n");
+		printf("1. 2D\t");
+		printf("2. 3D\t");
+		printf("3. 4D\n");
+		printf("------------------------------------------------\n");
+		printf("Unos: ");
+		scanf("%d", &odabirNacinGledanja);
+
+		switch (odabirNacinGledanja)
+		{
+		case 1:
+			strcpy(noviFilm.nacinGledanja, "2D");
+			break;
+		
+		case 2:
+			strcpy(noviFilm.nacinGledanja, "3D");
+			break;
+
+		case 3:
+			strcpy(noviFilm.nacinGledanja, "4D");
+			break;
+
+		default:
+			printf("Unesite ponovno!");
+			break;
+		}
+
+	} while (odabirNacinGledanja > 3);
+
+	static double cijenaUlaza;
 	printf("Unesite cijenu ulaza u kino: ");
 	do
 	{
@@ -140,15 +175,13 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 
 	} while (cijenaUlaza < 0 || cijenaUlaza > 100);
 
-	// zavrsetak unosa -------------------------------------------------------------------------------
+// zavrsetak unosa -------------------------------------------------------------------------------
 
 	(*filmovi)[*brojacFilmova] = noviFilm;
 	(*brojacFilmova)++;
 
 	printf("Dodan film.\n");
 }
-
-// scanf(" %[^\n]", noviFilm.zanr); -> ovo bilo za unošenje zanra al bolje odabir onda je uvijek isto
 
 void brisiFilm(FILM **filmovi, int *brojacFilmova, int *max)
 {
@@ -159,7 +192,7 @@ void brisiFilm(FILM **filmovi, int *brojacFilmova, int *max)
 	}
 
 	printf("Unesite index filma kojeg zelite obrisati: \n");
-	int index;
+	static int index;
 
 	do
 	{
@@ -178,6 +211,7 @@ void brisiFilm(FILM **filmovi, int *brojacFilmova, int *max)
 	printf("Film obrisan!\n");
 }
 
+//20
 void sortGodina(FILM *filmovi, int brojacFilmova)
 {
 	FILM tempFilm;
@@ -214,6 +248,25 @@ void sortZanr(FILM *filmovi, int brojacFilmova)
 	printf("Filmovi sortirani prema zanru(A-Z)!");
 }
 
+void sortiranjeCijeneUlaza(FILM* filmovi, int brojacFilmova){
+
+	FILM tempUlaz;
+	for (int i = 0; i < brojacFilmova - 1; i++)
+	{
+		for (int j = 0; j < brojacFilmova - i - 1; j++)
+		{
+			if (filmovi[j].placanjeUlaz > filmovi[j + 1].placanjeUlaz)
+			{
+				tempUlaz = filmovi[j];
+				filmovi[j] = filmovi[j + 1];
+				filmovi[j + 1] = tempUlaz;
+			}
+		}
+	}
+	printf("Filmovi su sortirani po cijeni!");
+}
+
+
 void povecanjeBaze(FILM **filmovi, int *maxFilms)
 {
 	int povecanje;
@@ -232,6 +285,7 @@ void povecanjeBaze(FILM **filmovi, int *maxFilms)
 
 	noviMaxFilms = *maxFilms + povecanje;
 
+	//14
 	FILM *noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
 	if (noviFilmovi == NULL)
 	{
@@ -271,6 +325,7 @@ void smanjenjeBaze(FILM **filmovi, int *maxFilms, int *brojacFilmova)
 		*brojacFilmova = noviMaxFilms;
 	}
 
+	//14
 	FILM *noviFilmovi = realloc(*filmovi, noviMaxFilms * sizeof(FILM));
 	if (noviFilmovi == NULL)
 	{
@@ -284,8 +339,31 @@ void smanjenjeBaze(FILM **filmovi, int *maxFilms, int *brojacFilmova)
 	*maxFilms = noviMaxFilms;
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+//18
+void preimenovanjeDatoteke(){ 
+	FILE *noviFile = fopen("novi.txt", "w");
+    if (noviFile != NULL){
+		perror("Nemoguce otvoriti file!");
+	}
+	int preimenuj;
+	char novoIme[30];
+	printf("Preimenujemo datoteku output.txt!\n");
+	printf("Novo ime: ");
+	scanf("%[^\n]", novoIme);
 
+	preimenuj = rename("novi.txt", novoIme);
+
+	if(preimenuj == 0) {
+      printf("\nUspjesno promjenjeno ime file-a.");
+   } else {
+      printf("Greska, nemoguce preimenovanje file-a!");
+   }
+
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+//21
 void pretrazivanjeFilmova(FILM *filmovi, int brojacFilmova)
 {
 
@@ -360,8 +438,8 @@ void trazenjeImeFilma(FILM *filmovi, int brojacFilmova)
 	{
 		if (strcmp(filmovi[i].ime, trazenjeIme) == 0) // opet usporedujemo tocnije filmovi[i].ime - trazenjeIme -- znaci ascii vrijednosti se oduzimaju ako je 0 rezultat znaci da je ime trazeno isto kao ime filma
 		{
-			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 			pronadeniFilm++;
 		}
 	}
@@ -394,8 +472,8 @@ void trazenjeIDFilma(FILM *filmovi, int brojacFilmova)
 	int pronadeniFilm;
 	if (trazenjeID >= 0 && trazenjeID < brojacFilmova)
 	{
-		printf("ID: %d. %s (%d) \t Zanr: %s\n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
-		fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr);
+		printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr, filmovi[trazenjeID].nacinGledanja, filmovi[trazenjeID].placanjeUlaz);
+		fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", trazenjeID, filmovi[trazenjeID].ime, filmovi[trazenjeID].godina, filmovi[trazenjeID].zanr, filmovi[trazenjeID].nacinGledanja, filmovi[trazenjeID].placanjeUlaz);
 		pronadeniFilm++;
 	}
 	if (pronadeniFilm == 0)
@@ -429,8 +507,8 @@ void trazenjeGodinaFilma(FILM *filmovi, int brojacFilmova)
 	{
 		if (trazenjeGodina == filmovi[i].godina)
 		{
-			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 			pronadeniFilm++;
 		}
 	}
@@ -531,8 +609,8 @@ void trazenjeZanrFilma(FILM *filmovi, int brojacFilmova)
 	{
 		if (strcmp(filmovi[i].zanr, trazenjeZanr) == 0)
 		{
-			printf("ID: %d. %s (%d) \t Zanr: %s\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
-			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr);
+			printf("ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+			fprintf(pronadeni, "ID: %d.  %s (%d) \t\t Zanr: %s \t Nacin Gledanja: %s \t Ulaz: %.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 			pronadeniFilm++;
 		}
 	}

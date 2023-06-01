@@ -1,11 +1,15 @@
 #ifndef header_h
 #define header_h
 
+extern int maxFilms; //5
+
+//3 //6 //1 //2
 typedef struct
 {
-    char ime[70];
+    char ime[70]; //12
     int godina;
-    char zanr[15];
+    char zanr[15]; //12
+    char nacinGledanja[3]; //12
     double placanjeUlaz;
 } FILM;
 
@@ -16,6 +20,8 @@ void sortGodina(FILM *filmovi, int brojacFilmova);
 void sortZanr(FILM *filmovi, int brojacFilmova);
 void povecanjeBaze(FILM **filmovi, int *maxFilms);
 void smanjenjeBaze(FILM **filmovi, int *maxFilms, int *brojacFilmova);
+void sortiranjeCijeneUlaza(FILM* filmovi, int brojacFilmova);
+void preimenovanjeDatoteke();
 
 // posebne funkcije za pretrazivajne
 void pretrazivanjeFilmova(FILM *filmovi, int brojacFilmova); // ova je jos u mainu
