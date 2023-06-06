@@ -4,8 +4,6 @@
 #include <string.h>
 #include "header.h"
 
-//za napravit 11 -- tocnije napravit da se ne loopa kad se da slovo umjesto broja
-
 //10 //4
 int main()
 {
@@ -36,7 +34,7 @@ int main()
         perror("Nemoguce otvoriti file.");
     }
 
-    char odabir[3];
+    char odabir[100];
     int closeLoop;
 
     printf("BAZA PODATAKA KINA -- FILMOVI\n");
@@ -57,14 +55,17 @@ int main()
         printf("8. Povecanje baze. \n");
         printf("9. Smanjenje baze. \n");
         printf("10. Provjera velicine baze. \n");
-        printf("11. Brisanje dokumenta\n");
+        printf("11. Preimenovanje i brisanje dokumenta(novog)\n");
         printf("12. Izaberite za zatvaranje programa. \n");
         printf("--------------------------------------------------------\n");
         printf("Izbor: ");
 
         // odabir -----------------------------------------------
 
-        scanf(" %2s", odabir);
+        int duzina;
+        scanf(" %99s", odabir);
+        duzina = strlen(odabir);
+        
 
         if (strcmp(odabir, "1") == 0) {
             ispisFilmova(filmovi, brojacFilmova);
@@ -115,7 +116,7 @@ int main()
             closeLoop = 12;
         }
         else {
-        printf("Krivi unos -- unesite brojeve 1-12\n");
+            printf("Krivi unos -- unesite brojeve 1-12\n");
         }
     } while(closeLoop != 12);
 
