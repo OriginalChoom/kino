@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "header.h"
 
 //za napravit 11 -- tocnije napravit da se ne loopa kad se da slovo umjesto broja
@@ -19,7 +20,7 @@ int main()
     int brojacFilmova = 0;
 
     // inicializiranje filmovi.txt -- //16
-    FILE *fileFilmovi = fopen("filmovi.txt", "r"); // moro stavit cijelu adresu vs code nije htio drugacije
+    FILE *fileFilmovi = fopen("filmovi.txt", "r"); 
     if (fileFilmovi != NULL)
     {
         //17
@@ -35,7 +36,8 @@ int main()
         perror("Nemoguce otvoriti file.");
     }
 
-    int odabir;
+    char odabir[3];
+    int closeLoop;
 
     printf("BAZA PODATAKA KINA -- FILMOVI\n");
     printf("Maksimalni broj filmova u bazi %d", maxFilms);
@@ -62,62 +64,60 @@ int main()
 
         // odabir -----------------------------------------------
 
-        scanf(" %d", &odabir);
+        scanf(" %2s", odabir);
 
-        switch (odabir)
-        {
-        case 1:
+        if (strcmp(odabir, "1") == 0) {
             ispisFilmova(filmovi, brojacFilmova);
-            break;
-
-        case 2:
-            dodajFilm(&filmovi, &brojacFilmova, &maxFilms);
-            break;
-
-        case 3:
-            brisiFilm(&filmovi, &brojacFilmova, &maxFilms);
-            break;
-
-        case 4:
-            sortGodina(filmovi, brojacFilmova); //20
-            break;
-
-        case 5:
-            sortZanr(filmovi, brojacFilmova); //20
-            break;
-
-        case 6:
-            sortiranjeCijeneUlaza(filmovi, brojacFilmova);
-            break;
-
-        case 7:
-            pretrazivanjeFilmova(filmovi, brojacFilmova); //21
-            break;
-
-        case 8:
-            povecanjeBaze(&filmovi, &maxFilms);
-            break;
-
-        case 9:
-            smanjenjeBaze(&filmovi, &maxFilms, &brojacFilmova);
-            break;
-
-        case 10:
-            printf("Trenutna velicina baze: %d\n", maxFilms);
-            break;
-
-        case 11:
-            preimenovanjeDatoteke(); //18
-            break;
-
-        case 12:
-            close(); // samo printf
-            break;
-
-        default:
-            printf("Krivi unos -- unesite brojeve 1-6\n");
+            closeLoop = 1;
         }
-    } while (odabir != 12);
+        else if (strcmp(odabir, "2") == 0) {
+            dodajFilm(&filmovi, &brojacFilmova, &maxFilms);
+            closeLoop = 2;
+        }
+        else if (strcmp(odabir, "3") == 0) {
+            brisiFilm(&filmovi, &brojacFilmova, &maxFilms);
+            closeLoop = 3;
+        }
+        else if (strcmp(odabir, "4") == 0) {
+            sortGodina(filmovi, brojacFilmova);
+            closeLoop = 4;
+        }
+        else if (strcmp(odabir, "5") == 0) {
+            sortZanr(filmovi, brojacFilmova);
+            closeLoop = 5;
+        }
+        else if (strcmp(odabir, "6") == 0) {
+            sortiranjeCijeneUlaza(filmovi, brojacFilmova);
+            closeLoop = 6;
+        }
+        else if (strcmp(odabir, "7") == 0) {
+            pretrazivanjeFilmova(filmovi, brojacFilmova);
+            closeLoop = 7;
+        }
+        else if (strcmp(odabir, "8") == 0) {
+            povecanjeBaze(&filmovi, &maxFilms);
+            closeLoop = 8;
+        }
+        else if (strcmp(odabir, "9") == 0) {
+            smanjenjeBaze(&filmovi, &maxFilms, &brojacFilmova);
+            closeLoop = 9;
+        }
+        else if (strcmp(odabir, "10") == 0) {
+            printf("Trenutna velicina baze: %d\n", maxFilms);
+            closeLoop = 10;
+        }
+        else if (strcmp(odabir, "11") == 0) {
+            preimenovanjeDatoteke();
+            closeLoop = 11;
+        }
+        else if (strcmp(odabir, "12") == 0) {
+            close();
+            closeLoop = 12;
+        }
+        else {
+        printf("Krivi unos -- unesite brojeve 1-12\n");
+        }
+    } while(closeLoop != 12);
 
     return 0;
     free(filmovi); //15

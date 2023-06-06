@@ -1,6 +1,8 @@
 #ifndef header_h
 #define header_h
 
+extern int maxFilms;
+
 //3 //6 //1 //2
 typedef struct
 {

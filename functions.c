@@ -60,7 +60,11 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 	// zavrsetak provjera
 
 	// unosenje zanra -- biranje umjesto samostalno utipkavanje onda je uvijek sve jednako -----------------
-	static int odabirZanraFilma; //5
+
+
+	static char odabirZanraFilma[3]; //5
+	int odabirZanraFilmaLoopClose; 
+
 	printf("Odaberite zanr novog filma: \n");
 
 	//8
@@ -83,51 +87,63 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 		printf("--------------------------------------------------------------\n");
 		printf("Odabir: ");
 
-		scanf("%d", &odabirZanraFilma);
+		scanf(" %2s", odabirZanraFilma);
 
-		switch (odabirZanraFilma)
-		{
-		case 1:
-			strcpy(noviFilm.zanr, "Action");
-			break;
-		case 2:
-			strcpy(noviFilm.zanr, "Adventure");
-			break;
-		case 3:
-			strcpy(noviFilm.zanr, "Animation");
-			break;
-		case 4:
-			strcpy(noviFilm.zanr, "Comedy");
-			break;
-		case 5:
+		if (strcmp(odabirZanraFilma, "1") == 0) {
+            strcpy(noviFilm.zanr, "Action");
+            odabirZanraFilmaLoopClose = 1;
+        }
+        else if (strcmp(odabirZanraFilma, "2") == 0) {
+            strcpy(noviFilm.zanr, "Adventure");
+            odabirZanraFilmaLoopClose = 2;
+        }
+        else if (strcmp(odabirZanraFilma, "3") == 0) {
+            strcpy(noviFilm.zanr, "Animation");
+            odabirZanraFilmaLoopClose = 3;
+        }
+        else if (strcmp(odabirZanraFilma, "4") == 0) {
+            strcpy(noviFilm.zanr, "Comedy");
+            odabirZanraFilmaLoopClose = 4;
+        }
+        else if (strcmp(odabirZanraFilma, "5") == 0) {
 			strcpy(noviFilm.zanr, "Drama");
-			break;
-		case 6:
-			strcpy(noviFilm.zanr, "Film-Noir");
-			break;
-		case 7:
-			strcpy(noviFilm.zanr, "Horror");
-			break;
-		case 8:
+            odabirZanraFilmaLoopClose = 5;
+        }
+        else if (strcmp(odabirZanraFilma, "6") == 0) {
+            strcpy(noviFilm.zanr, "Film-Noir");
+            odabirZanraFilmaLoopClose = 6;
+        }
+        else if (strcmp(odabirZanraFilma, "7") == 0) {
+            strcpy(noviFilm.zanr, "Horror");
+            odabirZanraFilmaLoopClose = 7;
+        }
+        else if (strcmp(odabirZanraFilma, "8") == 0) {
 			strcpy(noviFilm.zanr, "Mystery");
-			break;
-		case 9:
-			strcpy(noviFilm.zanr, "Sci-Fi");
-			break;
-		case 10:
-			strcpy(noviFilm.zanr, "War");
-			break;
-		case 11:
-			strcpy(noviFilm.zanr, "Western");
-			break;
-		case 12:
-			strcpy(noviFilm.zanr, "Music");
-			break;
-		default:
-			printf("Ne postoji zanr! Odaberite iz liste.\n");
-			break;
-		}
-	} while (odabirZanraFilma > 12);
+            odabirZanraFilmaLoopClose = 8;
+        }
+        else if (strcmp(odabirZanraFilma, "9") == 0) {
+            strcpy(noviFilm.zanr, "Sci-Fi");
+            odabirZanraFilmaLoopClose = 9;
+        }
+        else if (strcmp(odabirZanraFilma, "10") == 0) {
+            strcpy(noviFilm.zanr, "War");
+            odabirZanraFilmaLoopClose = 10;
+        }
+        else if (strcmp(odabirZanraFilma, "11") == 0) {
+            strcpy(noviFilm.zanr, "Western");
+            odabirZanraFilmaLoopClose = 11;
+        }
+        else if (strcmp(odabirZanraFilma, "12") == 0) {
+            strcpy(noviFilm.zanr, "Music");
+            odabirZanraFilmaLoopClose = 12;
+        }
+        else {
+        	printf("Ne postoji zanr! Odaberite iz liste.\n");
+			odabirZanraFilmaLoopClose = 0;
+        }
+
+	} while (odabirZanraFilmaLoopClose == 0);
+
 
 	static int odabirNacinGledanja;
 	printf("Unesite nacin gledanja filma: ");
@@ -526,8 +542,9 @@ void trazenjeGodinaFilma(FILM *filmovi, int brojacFilmova)
 // ZANR
 void trazenjeZanrFilma(FILM *filmovi, int brojacFilmova)
 {
-	int trazenjeZanrOdabir;
+	char trazenjeZanrOdabir[3];
 	char trazenjeZanr[15];
+	int trazenjeZanrLoopClose;
 
 	printf("Unesite zanr kojeg zelite traziti: ");
 	printf("\n");
@@ -551,51 +568,62 @@ void trazenjeZanrFilma(FILM *filmovi, int brojacFilmova)
 		printf("--------------------------------------------------------------\n");
 		printf("Odabir: ");
 
-		scanf("%d", &trazenjeZanrOdabir);
+		scanf(" %2s", trazenjeZanrOdabir);
 
-		switch (trazenjeZanrOdabir)
-		{
-		case 1:
-			strcpy(trazenjeZanr, "Action");
-			break;
-		case 2:
-			strcpy(trazenjeZanr, "Adventure");
-			break;
-		case 3:
-			strcpy(trazenjeZanr, "Animation");
-			break;
-		case 4:
-			strcpy(trazenjeZanr, "Comedy");
-			break;
-		case 5:
+		if (strcmp(trazenjeZanrOdabir, "1") == 0) {
+            strcpy(trazenjeZanr, "Action");
+            trazenjeZanrLoopClose = 1;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "2") == 0) {
+            strcpy(trazenjeZanr, "Adventure");
+            trazenjeZanrLoopClose = 2;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "3") == 0) {
+            strcpy(trazenjeZanr, "Animation");
+            trazenjeZanrLoopClose = 3;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "4") == 0) {
+            strcpy(trazenjeZanr, "Comedy");
+            trazenjeZanrLoopClose = 4;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "5") == 0) {
 			strcpy(trazenjeZanr, "Drama");
-			break;
-		case 6:
-			strcpy(trazenjeZanr, "Film-Noir");
-			break;
-		case 7:
-			strcpy(trazenjeZanr, "Horror");
-			break;
-		case 8:
+            trazenjeZanrLoopClose = 5;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "6") == 0) {
+            strcpy(trazenjeZanr, "Film-Noir");
+            trazenjeZanrLoopClose = 6;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "7") == 0) {
+            strcpy(trazenjeZanr, "Horror");
+            trazenjeZanrLoopClose = 7;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "8") == 0) {
 			strcpy(trazenjeZanr, "Mystery");
-			break;
-		case 9:
-			strcpy(trazenjeZanr, "Sci-Fi");
-			break;
-		case 10:
-			strcpy(trazenjeZanr, "War");
-			break;
-		case 11:
-			strcpy(trazenjeZanr, "Western");
-			break;
-		case 12:
-			strcpy(trazenjeZanr, "Music");
-			break;
-		default:
-			printf("Ne postoji zanr! Odaberite iz liste.\n");
-			break;
-		}
-	} while (trazenjeZanrOdabir > 12);
+            trazenjeZanrLoopClose = 8;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "9") == 0) {
+            strcpy(trazenjeZanr, "Sci-Fi");
+            trazenjeZanrLoopClose = 9;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "10") == 0) {
+            strcpy(trazenjeZanr, "War");
+            trazenjeZanrLoopClose = 10;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "11") == 0) {
+            strcpy(trazenjeZanr, "Western");
+            trazenjeZanrLoopClose = 11;
+        }
+        else if (strcmp(trazenjeZanrOdabir, "12") == 0) {
+            strcpy(trazenjeZanr, "Music");
+            trazenjeZanrLoopClose = 12;
+        }
+        else {
+        	printf("Ne postoji zanr! Odaberite iz liste.\n");
+			trazenjeZanrLoopClose = 0;
+        }
+
+	} while (trazenjeZanrLoopClose == 0);
 
 	// odma otvaram file za ispis da ne moram sacuvat id pronadenog filma
 	FILE *pronadeni = fopen("pronadeni.txt", "w");

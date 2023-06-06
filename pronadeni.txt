@@ -1,9 +1,3 @@
 Film/ovi koje/g ste trazili: 
 
-ID: 3.  Predator (1987) 		 Zanr: Action 
-ID: 5.  Kill Bill Vol. 1 (2003) 		 Zanr: Action 
-ID: 6.  Fast Five (2011) 		 Zanr: Action 
-ID: 8.  John Wick (2014) 		 Zanr: Action 
-ID: 9.  John Wick Chaper 2 (2017) 		 Zanr: Action 
-ID: 10.  John Wick 3 (2019) 		 Zanr: Action 
-ID: 11.  John Wick Chapter 4 (2023) 		 Zanr: Action 
+ID: 0.  It's a Wonderfull life (1946) 		 Zanr: Drama 	 Nacin Gledanja: 2D 	 Ulaz: 45.50kn
