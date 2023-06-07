@@ -13,15 +13,16 @@ typedef struct
     double placanjeUlaz;
 } FILM;
 
-void ispisFilmova(FILM *filmovi, int brojacFilmova);
+void ispisFilmova(FILM *filmovi, int const brojacFilmova);
 void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms);
 void brisiFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms);
-void sortGodina(FILM *filmovi, int brojacFilmova);
-void sortZanr(FILM *filmovi, int brojacFilmova);
+void sortGodina(FILM *filmovi, int const brojacFilmova);
+void sortZanr(FILM *filmovi, int const brojacFilmova);
 void povecanjeBaze(FILM **filmovi, int *maxFilms);
 void smanjenjeBaze(FILM **filmovi, int *maxFilms, int *brojacFilmova);
-void sortiranjeCijeneUlaza(FILM* filmovi, int brojacFilmova);
+void sortiranjeCijeneUlaza(FILM* filmovi, int const brojacFilmova);
 void preimenovanjeDatoteke();
+void randomFilm(FILM *filmovi, int brojacFilmova);
 
 // posebne funkcije za pretrazivajne
 void pretrazivanjeFilmova(FILM *filmovi, int brojacFilmova); // ova je jos u mainu

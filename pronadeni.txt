@@ -1,4 +1,3 @@
 Film/ovi koje/g ste trazili: 
 
-ID:  1.  Kill Bill Vol. 1               (2003) 	 Zanr: Action       	 Nacin Gledanja: 3D  	 Ulaz:   5.00kn
-ID:  5.  Fast Five                      (2011) 	 Zanr: Action       	 Nacin Gledanja: 2D  	 Ulaz:   5.00kn
+U bazi nema filmova koji odgovaraju odabranom zanru!

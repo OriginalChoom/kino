@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "header.h"
 
 //10  //9
-inline void ispisFilmova(FILM *filmovi, int brojacFilmova) //7
+inline void ispisFilmova(FILM *filmovi, int const brojacFilmova) //7
 {
 	if (brojacFilmova == 0)
 	{
@@ -191,19 +192,29 @@ void dodajFilm(FILM **filmovi, int *brojacFilmova, int *maxFilms)
 	} while (odabirNacinGledanja[0] > '3');
 
 	static double cijenaUlaza;
-	printf("Unesite cijenu ulaza u kino: "); //ako se upise slovo samo ce uzet prosli upis novaca kao ovaj -- ugl ne radi
+	char inputCijena[100];
+	int dobarInput = 0;
+
+	printf("Unesite cijenu ulaza u kino: ");
+	
 	do
 	{
-		scanf("%lf", &cijenaUlaza);
-		noviFilm.placanjeUlaz = cijenaUlaza;
-		if (cijenaUlaza < 0 || cijenaUlaza > 100)
+		fgets(inputCijena, sizeof(inputCijena), stdin);
+		if (sscanf(inputCijena, "%lf", &cijenaUlaza) == 1)
 		{
-			printf("Cijena mora biti razumna(0-100).\n");
+			if (!(cijenaUlaza < 0 || cijenaUlaza > 100))
+			{
+				dobarInput = 1;
+			}else{
+				printf("Cijena mora biti razumna(0-100).\n");
+				printf("Unesite cijenu: ");
+			}
+		}else{
+			printf("Unesite broj ne string.\n");
 			printf("Unesite cijenu: ");
 		}
-		
-
-	} while (cijenaUlaza < 0 || cijenaUlaza > 100);
+	} while (!dobarInput);
+	noviFilm.placanjeUlaz = cijenaUlaza;
 
 // zavrsetak unosa -------------------------------------------------------------------------------
 
@@ -242,7 +253,7 @@ void brisiFilm(FILM **filmovi, int *brojacFilmova, int *max)
 }
 
 //20
-void sortGodina(FILM *filmovi, int brojacFilmova)
+void sortGodina(FILM *filmovi, int const brojacFilmova)
 {
 	FILM tempFilm;
 	for (int i = 0; i < brojacFilmova - 1; i++)
@@ -260,7 +271,7 @@ void sortGodina(FILM *filmovi, int brojacFilmova)
 	printf("Filmovi su sortirani po godina!");
 }
 
-void sortZanr(FILM *filmovi, int brojacFilmova)
+void sortZanr(FILM *filmovi, int const brojacFilmova)
 {
 	FILM tempZanr;
 	for (int i = 0; i < brojacFilmova - 1; i++)
@@ -278,7 +289,7 @@ void sortZanr(FILM *filmovi, int brojacFilmova)
 	printf("Filmovi sortirani prema zanru(A-Z)!");
 }
 
-void sortiranjeCijeneUlaza(FILM* filmovi, int brojacFilmova){
+void sortiranjeCijeneUlaza(FILM* filmovi, int const brojacFilmova){
 
 	FILM tempUlaz;
 	for (int i = 0; i < brojacFilmova - 1; i++)
@@ -434,6 +445,25 @@ void preimenovanjeDatoteke(){
 
 	} while (unosBrisanja[0] > '2');
 }
+
+void randomFilm(FILM *filmovi, int brojacFilmova){
+	srand((unsigned)time(NULL));
+	int min = 0;
+
+	int dobivanjeRandomFilma = min + rand() % (brojacFilmova - min);
+
+	FILE *pronadeni = fopen("pronadeni.txt", "w");
+	if (pronadeni == NULL)
+	{
+		printf("\nNe moze se otvoriti file!\n");
+		return;
+	}
+	printf("Random film iz liste: \n");
+	fprintf(pronadeni, "Random film iz liste: \n");
+	printf("ID: %2d.  %-30s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", dobivanjeRandomFilma, filmovi[dobivanjeRandomFilma].ime, filmovi[dobivanjeRandomFilma].godina, filmovi[dobivanjeRandomFilma].zanr, filmovi[dobivanjeRandomFilma].nacinGledanja, filmovi[dobivanjeRandomFilma].placanjeUlaz);
+	fprintf(pronadeni, "ID: %2d.  %-30s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", dobivanjeRandomFilma, filmovi[dobivanjeRandomFilma].ime, filmovi[dobivanjeRandomFilma].godina, filmovi[dobivanjeRandomFilma].zanr, filmovi[dobivanjeRandomFilma].nacinGledanja, filmovi[dobivanjeRandomFilma].placanjeUlaz);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 
 //21
@@ -701,7 +731,9 @@ void trazenjeZanrFilma(FILM *filmovi, int brojacFilmova)
 	fprintf(pronadeni, "Film/ovi koje/g ste trazili: \n\n");
 
 	// krece algoritam trazenja
-	int pronadeniFilm;
+
+	int pronadeniFilm = 0;
+	
 	for (int i = 0; i < brojacFilmova; i++)
 	{
 		if (strcmp(filmovi[i].zanr, trazenjeZanr) == 0)

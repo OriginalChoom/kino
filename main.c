@@ -56,7 +56,8 @@ int main()
         printf("9. Smanjenje baze. \n");
         printf("10. Provjera velicine baze. \n");
         printf("11. Preimenovanje i brisanje dokumenta(novog)\n");
-        printf("12. Izaberite za zatvaranje programa. \n");
+        printf("12. Random film iz liste. \n");
+        printf("13. Izaberite za zatvaranje programa. \n");
         printf("--------------------------------------------------------\n");
         printf("Izbor: ");
 
@@ -112,16 +113,20 @@ int main()
             closeLoop = 11;
         }
         else if (strcmp(odabir, "12") == 0) {
-            close();
+            randomFilm(filmovi, brojacFilmova);
             closeLoop = 12;
         }
-        else {
-            printf("Krivi unos -- unesite brojeve 1-12\n");
+        else if (strcmp(odabir, "13") == 0) {
+            close();
+            closeLoop = 13;
         }
-    } while(closeLoop != 12);
+        else {
+            printf("Krivi unos -- unesite brojeve 1-13\n");
+        }
+    } while(closeLoop != 13);
 
-    return 0;
     free(filmovi); //15
+    return 0;
 }
 
 inline void close() //7
