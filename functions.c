@@ -16,7 +16,7 @@ inline void ispisFilmova(FILM *filmovi, int const brojacFilmova) //7
 	printf("\nLista filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		printf("ID: %2d.  %-30s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+		printf("ID: %2d.  %-40s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 
 	}
 
@@ -29,7 +29,7 @@ inline void ispisFilmova(FILM *filmovi, int const brojacFilmova) //7
 	fprintf(output, "Lista Filmova: \n\n");
 	for (int i = 0; i < brojacFilmova; i++)
 	{
-		fprintf(output, "ID: %2d.  %-30s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
+		fprintf(output, "ID: %2d.  %-40s (%4d) \t Zanr: %-12s \t Nacin Gledanja: %-3s \t Ulaz: %6.2fkn\n", i, filmovi[i].ime, filmovi[i].godina, filmovi[i].zanr, filmovi[i].nacinGledanja, filmovi[i].placanjeUlaz);
 	}
 	fclose(output);
 	free(filmovi);

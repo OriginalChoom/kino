@@ -1,9 +1,10 @@
 Lista Filmova: 
 
-ID:  0.  It's a Wonderfull life         (1946) 	 Zanr: Drama        	 Nacin Gledanja: 2D  	 Ulaz:  45.50kn
-ID:  1.  Kill Bill Vol. 1               (2003) 	 Zanr: Action       	 Nacin Gledanja: 3D  	 Ulaz:   5.00kn
-ID:  2.  Real Steel                     (2011) 	 Zanr: Sci-fi       	 Nacin Gledanja: 4D  	 Ulaz:   6.00kn
-ID:  3.  Saving Private Ryan            (1998) 	 Zanr: War          	 Nacin Gledanja: 2D  	 Ulaz:   4.50kn
-ID:  4.  Double Indemity                (1944) 	 Zanr: Film-Noir    	 Nacin Gledanja: 2D  	 Ulaz:   5.30kn
-ID:  5.  Fast Five                      (2011) 	 Zanr: Action       	 Nacin Gledanja: 2D  	 Ulaz:   5.00kn
-ID:  6.  Edge of Tomorrow               (2014) 	 Zanr: Sci-fi       	 Nacin Gledanja: 2D  	 Ulaz:  33.30kn
+ID:  0.  It's a Wonderfull life                   (1946) 	 Zanr: Drama        	 Nacin Gledanja: 2D  	 Ulaz:  45.50kn
+ID:  1.  Kill Bill Vol. 1                         (2003) 	 Zanr: Action       	 Nacin Gledanja: 3D  	 Ulaz:   5.00kn
+ID:  2.  Real Steel                               (2011) 	 Zanr: Sci-fi       	 Nacin Gledanja: 4D  	 Ulaz:   6.00kn
+ID:  3.  Saving Private Ryan                      (1998) 	 Zanr: War          	 Nacin Gledanja: 2D  	 Ulaz:   4.50kn
+ID:  4.  Double Indemity                          (1944) 	 Zanr: Film-Noir    	 Nacin Gledanja: 2D  	 Ulaz:   5.30kn
+ID:  5.  Fast Five                                (2011) 	 Zanr: Action       	 Nacin Gledanja: 2D  	 Ulaz:   5.00kn
+ID:  6.  Edge of Tomorrow                         (2014) 	 Zanr: Sci-fi       	 Nacin Gledanja: 2D  	 Ulaz:  33.30kn
+ID:  7.  Spiderman-Across The Spider-Verse        (2023) 	 Zanr: Animation    	 Nacin Gledanja: 2D  	 Ulaz:  35.50kn

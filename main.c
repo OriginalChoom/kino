@@ -63,11 +63,8 @@ int main()
 
         // odabir -----------------------------------------------
 
-        int duzina;
         scanf(" %99s", odabir);
-        duzina = strlen(odabir);
         
-
         if (strcmp(odabir, "1") == 0) {
             ispisFilmova(filmovi, brojacFilmova);
             closeLoop = 1;
